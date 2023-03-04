@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:veggytably_driver/controllers/auth_controller.dart';
 import 'package:veggytably_driver/widgets/input_text.dart';
 
 class LoginPage extends StatelessWidget {
@@ -7,11 +8,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.put(AuthController());
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
-      
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
@@ -26,7 +27,9 @@ class LoginPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
 
             // Text: Powered by Vegytably
             Text('Powered by Veggytably',
@@ -36,37 +39,41 @@ class LoginPage extends StatelessWidget {
                 )),
             SizedBox(height: 42),
 
-            Column(
-              children: [
-                Container(
-                  width: 300,
-                  child: InputTextField(
-                    emailController,
-                    'Email',
+            Form(
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 300,
+                    child: InputTextField(
+                      textEditingController: emailController,
+                      hintText: 'Email',
+                    ),
                   ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  width: 300,
-                  child: InputTextField(
-                    passwordController,
-                    'Password',
+                  SizedBox(height: 16),
+                  SizedBox(
+                    width: 300,
+                    child: InputTextField(
+                      textEditingController: passwordController,
+                      hintText: 'Password',
+                      obscureText: true,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             // Input Email or Telephone Number
             SizedBox(height: 16),
 
-            // Login button
+            // Login Submit button
             Container(
               width: 300,
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  
-                  // emailController.clear();
-                  // passwordController.clear();
+                  authController.login(
+                    emailController,
+                    passwordController,
+                  );
                 },
                 child: Text(
                   'Login',
@@ -91,15 +98,16 @@ class LoginPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Text(
-                    "New user? ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
+                    Text(
+                      "New user? ",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
                         fontSize: 15,
+                      ),
                     ),
-                  ),
-                   GestureDetector(
+                    GestureDetector(
                       onTap: () {
+                        // TODO: Navigate to Sign Up Page
                         // Get.offAll(() => SignUpPage(), transition: Transition.fade);
                       },
                       child: Text(
@@ -113,12 +121,11 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                ],)
-            ),
+                  ],
+                )),
             SizedBox(height: 5),
 
             // Text: Sign Up
-           
           ]),
         ),
       ),

@@ -26,11 +26,12 @@ class HomePageOff extends StatelessWidget {
                 //image
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/image 2.png'),
+                        image: Image.asset('images/image2.png').image,
                         fit: BoxFit.cover)),
                 //text container
                 
               ),
+              
               SizedBox(height: 29,),
               Text(
                   "YOU ARE IN THE OFFLINE MODE!",

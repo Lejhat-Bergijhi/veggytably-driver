@@ -51,9 +51,17 @@ class _CustomSwitchState extends State<CustomSwitch>
             
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
-              color: _circleAnimation!.value == Alignment.centerRight
-                  ? Colors.grey
-                  : Color(0xff356631)
+              
+              border: 
+                Border.all(
+                  color: _circleAnimation!.value == Alignment.centerRight
+                      ? Color.fromARGB(255, 255, 255, 255)
+                      : Color(0xff356631),
+                  width: 3.0,
+                ),
+              color: _circleAnimation!.value != Alignment.centerRight
+                  ? Color.fromARGB(255, 255, 255, 255)
+                  : Color(0xff70cb88)
             ),
             child: Padding(
               padding: const EdgeInsets.only(
@@ -65,7 +73,11 @@ class _CustomSwitchState extends State<CustomSwitch>
                   width: 20.0,
                   height: 20.0,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
+                      shape: BoxShape.circle, 
+                      color: _circleAnimation!.value == Alignment.centerRight
+                        ? Color.fromARGB(255, 255, 255, 255)
+                        : Color(0xff356631)
+                      ),
                 ),
               ),
             ),

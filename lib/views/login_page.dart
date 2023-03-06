@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:veggytably_driver/controllers/auth_controller.dart';
 import 'package:veggytably_driver/widgets/input_text.dart';
 
+import 'signup_page_1.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.put(AuthController());
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
@@ -70,7 +71,7 @@ class LoginPage extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  authController.login(
+                  AuthController.instance.login(
                     emailController,
                     passwordController,
                   );
@@ -108,7 +109,8 @@ class LoginPage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         // TODO: Navigate to Sign Up Page
-                        // Get.offAll(() => SignUpPage(), transition: Transition.fade);
+                        Get.offAll(() => SignUpPage1(),
+                            transition: Transition.fade);
                       },
                       child: Text(
                         'Sign Up',

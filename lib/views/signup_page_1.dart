@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:veggytably_driver/controllers/auth_controller.dart';
+import 'package:veggytably_driver/views/login_page.dart';
 import 'package:veggytably_driver/widgets/input_text.dart';
 
 class SignUpPage1 extends StatelessWidget {
@@ -7,11 +9,13 @@ class SignUpPage1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController usernameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
+    TextEditingController phoneController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController licensePlateController = TextEditingController();
 
     return Scaffold(
-      
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
@@ -26,7 +30,9 @@ class SignUpPage1 extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
 
             // Text: Powered by Vegytably
             Text('Ready to Deliver Food Everywhere and Anywhere!',
@@ -41,40 +47,41 @@ class SignUpPage1 extends StatelessWidget {
                 Container(
                   width: 300,
                   child: InputTextField(
-                    emailController,
-                    'Name',
+                    textEditingController: usernameController,
+                    hintText: 'Name',
                   ),
                 ),
                 SizedBox(height: 12),
                 Container(
                   width: 300,
                   child: InputTextField(
-                    emailController,
-                    'Email',
+                    textEditingController: emailController,
+                    hintText: 'Email',
                   ),
                 ),
                 SizedBox(height: 12),
                 Container(
                   width: 300,
                   child: InputTextField(
-                    passwordController,
-                    'Telephone Number',
+                    textEditingController: phoneController,
+                    hintText: 'Telephone Number',
                   ),
                 ),
                 SizedBox(height: 12),
                 Container(
                   width: 300,
                   child: InputTextField(
-                    emailController,
-                    'Password',
+                    textEditingController: passwordController,
+                    hintText: 'Password',
+                    obscureText: true,
                   ),
                 ),
                 SizedBox(height: 12),
                 Container(
                   width: 300,
                   child: InputTextField(
-                    emailController,
-                    'Licence Plate',
+                    textEditingController: licensePlateController,
+                    hintText: 'Licence Plate',
                   ),
                 ),
               ],
@@ -82,15 +89,20 @@ class SignUpPage1 extends StatelessWidget {
             // Input Email or Telephone Number
             SizedBox(height: 12),
 
-            // Login button
+            // Continue button
             Container(
               width: 300,
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  
-                  // emailController.clear();
-                  // passwordController.clear();
+                  AuthController.instance.signUp(
+                      usernameController,
+                      emailController,
+                      phoneController,
+                      passwordController,
+                      licensePlateController);
+                  // Get.to(() => SignUpPage2(),
+                  //     transition: Transition.fade);
                 },
                 child: Text(
                   'Continue',
@@ -115,16 +127,17 @@ class SignUpPage1 extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Text(
-                    "Already have an account?",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
+                    Text(
+                      "Already have an account?",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
                         fontSize: 15,
+                      ),
                     ),
-                  ),
-                   GestureDetector(
+                    GestureDetector(
                       onTap: () {
-                        // Get.offAll(() => SignUpPage(), transition: Transition.fade);
+                        Get.offAll(() => LoginPage(),
+                            transition: Transition.fade);
                       },
                       child: Text(
                         'Login',
@@ -137,12 +150,11 @@ class SignUpPage1 extends StatelessWidget {
                         ),
                       ),
                     ),
-                ],)
-            ),
+                  ],
+                )),
             SizedBox(height: 5),
 
             // Text: Sign Up
-           
           ]),
         ),
       ),

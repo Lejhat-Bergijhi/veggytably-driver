@@ -7,10 +7,12 @@ import "package:http/http.dart" as http;
 import "../models/authentication_response.dart";
 import "../models/exception_response.dart";
 import "../utils/api.endpoints.dart";
+import "../views/home_page_off.dart";
 import "../views/login_page.dart";
 // import "../views/home_page.dart";
 
 class AuthController extends GetxController {
+  static AuthController instance = Get.put(AuthController());
   final _storage = const FlutterSecureStorage();
 
   Future<void> signUp(
@@ -18,8 +20,7 @@ class AuthController extends GetxController {
     TextEditingController emailController,
     TextEditingController phoneController,
     TextEditingController passwordController,
-    TextEditingController restaurantNameController,
-    TextEditingController restaurantAddressController,
+    TextEditingController licensePlateController,
   ) async {
     try {
       var headers = {"Content-Type": "application/json"};
@@ -31,8 +32,7 @@ class AuthController extends GetxController {
         "email": emailController.text.trim(),
         "password": passwordController.text,
         "phone": phoneController.text,
-        "restaurantName": restaurantNameController.text,
-        "restaurantAddress": restaurantAddressController.text,
+        "licensePlate": licensePlateController.text,
       };
 
       http.Response response = await http.post(
@@ -60,10 +60,10 @@ class AuthController extends GetxController {
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
 
       // TODO: Navigate to home page
-      // Get.offAll(
-      //   () => HomePage(),
-      //   transition: Transition.rightToLeft,
-      // );
+      Get.offAll(
+        () => HomePageOff(),
+        transition: Transition.rightToLeft,
+      );
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());
@@ -110,10 +110,10 @@ class AuthController extends GetxController {
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
 
       // TODO: Navigate to home page
-      // Get.offAll(
-      //   () => HomePage(),
-      //   transition: Transition.fade,
-      // );
+      Get.offAll(
+        () => HomePageOff(),
+        transition: Transition.fade,
+      );
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());

@@ -1,5 +1,6 @@
 class ApiEndPoints {
-  static const String baseUrl = "http://localhost:5000/";
+  static const String domain = "10.53.12.87";
+  static const String baseUrl = 'http://$domain:5000/';
   static final _AuthEndPoints authEndpoints = _AuthEndPoints();
   static final _DriverEndPoints merchantEndpoints = _DriverEndPoints();
 }

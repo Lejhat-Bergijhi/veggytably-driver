@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:veggytably_driver/controllers/auth_controller.dart';
-import 'package:veggytably_driver/views/login_page.dart';
+import 'package:veggytably_driver/views/upload_pic.dart';
 import 'package:veggytably_driver/widgets/input_text.dart';
 
-class SignUpPage1 extends StatelessWidget {
-  const SignUpPage1({super.key});
+import 'package:veggytably_driver/views/login_page.dart';
+import 'package:veggytably_driver/views/signup_page_2.dart';
+
+class SignUpPage extends StatefulWidget {
+  SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPage1State();
+}
+
+class _SignUpPage1State extends State<SignUpPage> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController licensePlateController = TextEditingController();
+  TextEditingController vehicleTypeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController phoneController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController licensePlateController = TextEditingController();
     final sw = MediaQuery.of(context).size.width;
-    TextEditingController vehicleType = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -42,75 +53,77 @@ class SignUpPage1 extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   )),
               SizedBox(height: 38),
-              Column(
-                children: [
-                  Container(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: usernameController,
-                      hintText: 'Name',
+              Form(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: 300,
+                      child: InputTextField(
+                        textEditingController: usernameController,
+                        hintText: 'Name',
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 12),
-                  Container(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: emailController,
-                      hintText: 'Email',
+                    SizedBox(height: 12),
+                    SizedBox(
+                      width: 300,
+                      child: InputTextField(
+                        textEditingController: emailController,
+                        hintText: 'Email',
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 12),
-                  Container(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: phoneController,
-                      hintText: 'Telephone Number',
+                    SizedBox(height: 12),
+                    SizedBox(
+                      width: 300,
+                      child: InputTextField(
+                        textEditingController: phoneController,
+                        hintText: 'Telephone Number',
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 12),
-                  Container(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: passwordController,
-                      hintText: 'Password',
-                      obscureText: true,
+                    SizedBox(height: 12),
+                    SizedBox(
+                      width: 300,
+                      child: InputTextField(
+                        textEditingController: passwordController,
+                        hintText: 'Password',
+                        obscureText: true,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 12),
-                  Container(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: vehicleType,
-                      hintText: 'Vehicle Type',
+                    SizedBox(height: 12),
+                    SizedBox(
+                      width: 300,
+                      child: InputTextField(
+                        textEditingController: vehicleTypeController,
+                        hintText: 'Vehicle Type',
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 12),
-                  Container(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: licensePlateController,
-                      hintText: 'License Plate',
+                    SizedBox(height: 12),
+                    SizedBox(
+                      width: 300,
+                      child: InputTextField(
+                        textEditingController: licensePlateController,
+                        hintText: 'License Plate',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               // Input Email or Telephone Number
               SizedBox(height: 12),
 
               // Continue button
-              Container(
+              SizedBox(
                 width: 300,
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
                     AuthController.instance.signUp(
-                        usernameController,
-                        emailController,
-                        phoneController,
-                        passwordController,
-                        licensePlateController);
-                    // Get.to(() => SignUpPage2(),
-                    //     transition: Transition.fade);
+                      usernameController,
+                      emailController,
+                      phoneController,
+                      passwordController,
+                      vehicleTypeController,
+                      licensePlateController,
+                    );
                   },
                   child: Text(
                     'Continue',

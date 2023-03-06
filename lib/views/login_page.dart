@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:veggytably_driver/controllers/auth_controller.dart';
 import 'package:veggytably_driver/widgets/input_text.dart';
-
-import 'signup_page_1.dart';
+import 'signup_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -110,7 +110,7 @@ class LoginPage extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           // TODO: Navigate to Sign Up Page
-                          Get.offAll(() => SignUpPage1(),
+                          Get.offAll(() => SignUpPage(),
                               transition: Transition.fade);
                         },
                         child: Text(

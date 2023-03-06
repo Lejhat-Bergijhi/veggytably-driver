@@ -14,27 +14,27 @@ class SignUpPage1 extends StatelessWidget {
     TextEditingController phoneController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController licensePlateController = TextEditingController();
+    final sw = MediaQuery.of(context).size.width;
     TextEditingController vehicleType = TextEditingController();
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Center(
-          child: Column(children: [
-            SizedBox(height: 75),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(children: [
+              SizedBox(height: 75),
 
-            // Text: VegyMerch
-            Text(
-              'Welcome!',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
+              // Text: VegyMerch
+              Text(
+                'Welcome!',
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-
+              SizedBox(
+                height: 8,
+              ),
             // Text: Powered by Vegytably
             Text('Ready to Deliver Food Everywhere and Anywhere!',
                 style: TextStyle(
@@ -42,39 +42,39 @@ class SignUpPage1 extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 )),
             SizedBox(height: 38),
-
-            Column(
-              children: [
-                Container(
-                  width: 300,
-                  child: InputTextField(
-                    textEditingController: usernameController,
-                    hintText: 'Name',
+              Column(
+                children: [
+                  Container(
+                    width: 300,
+                    child: InputTextField(
+                      textEditingController: usernameController,
+                      hintText: 'Name',
+                    ),
                   ),
-                ),
-                SizedBox(height: 12),
-                Container(
-                  width: 300,
-                  child: InputTextField(
-                    textEditingController: emailController,
-                    hintText: 'Email',
+                  SizedBox(height: 12),
+                  Container(
+                    width: 300,
+                    child: InputTextField(
+                      textEditingController: emailController,
+                      hintText: 'Email',
+                    ),
                   ),
-                ),
-                SizedBox(height: 12),
-                Container(
-                  width: 300,
-                  child: InputTextField(
-                    textEditingController: phoneController,
-                    hintText: 'Telephone Number',
+                  SizedBox(height: 12),
+                  Container(
+                    width: 300,
+                    child: InputTextField(
+                      textEditingController: phoneController,
+                      hintText: 'Telephone Number',
+                    ),
                   ),
-                ),
-                SizedBox(height: 12),
-                Container(
-                  width: 300,
-                  child: InputTextField(
-                    textEditingController: passwordController,
-                    hintText: 'Password',
-                    obscureText: true,
+                  SizedBox(height: 12),
+                  Container(
+                    width: 300,
+                    child: InputTextField(
+                      textEditingController: passwordController,
+                      hintText: 'Password',
+                      obscureText: true,
+                    ),
                   ),
                 ),
                 SizedBox(height: 12),
@@ -91,80 +91,81 @@ class SignUpPage1 extends StatelessWidget {
                   child: InputTextField(
                     textEditingController: licensePlateController,
                     hintText: 'License Plate',
+                    ),
                   ),
-                ),
-              ],
-            ),
-            // Input Email or Telephone Number
-            SizedBox(height: 12),
+                ],
+              ),
+              // Input Email or Telephone Number
+              SizedBox(height: 12),
 
-            // Continue button
-            Container(
-              width: 300,
-              height: 45,
-              child: ElevatedButton(
-                onPressed: () {
-                  AuthController.instance.signUp(
-                      usernameController,
-                      emailController,
-                      phoneController,
-                      passwordController,
-                      licensePlateController);
-                  // Get.to(() => SignUpPage2(),
-                  //     transition: Transition.fade);
-                },
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+              // Continue button
+              Container(
+                width: 300,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () {
+                    AuthController.instance.signUp(
+                        usernameController,
+                        emailController,
+                        phoneController,
+                        passwordController,
+                        licensePlateController);
+                    // Get.to(() => SignUpPage2(),
+                    //     transition: Transition.fade);
+                  },
+                  child: Text(
+                    'Continue',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xff70cb88),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 16),
+              SizedBox(height: 16),
 
-            // Text: Don't have an account?
-            SizedBox(
-                width: 219,
-                height: 21,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an account?",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.offAll(() => LoginPage(),
-                            transition: Transition.fade);
-                      },
-                      child: Text(
-                        'Login',
+              // Text: Don't have an account?
+              SizedBox(
+                  width: sw,
+                  height: 21,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already have an account?",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff356631),
-                          //underline
-                          decoration: TextDecoration.underline,
                         ),
                       ),
-                    ),
-                  ],
-                )),
-            SizedBox(height: 5),
+                      GestureDetector(
+                        onTap: () {
+                          Get.offAll(() => LoginPage(),
+                              transition: Transition.fade);
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff356631),
+                            //underline
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+              SizedBox(height: 5),
 
-            // Text: Sign Up
-          ]),
+              // Text: Sign Up
+            ]),
+          ),
         ),
       ),
     );

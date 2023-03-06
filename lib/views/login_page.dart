@@ -16,119 +16,121 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Center(
-          child: Column(children: [
-            SizedBox(height: 240),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(children: [
+              SizedBox(height: 240),
 
-            // Text: VegyMerch
-            Text(
-              'VeggyDriver',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-
-            // Text: Powered by Vegytably
-            Text('Powered by Veggytably',
+              // Text: VegyMerch
+              Text(
+                'VeggyDriver',
                 style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                )),
-            SizedBox(height: 42),
-
-            Form(
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: emailController,
-                      hintText: 'Email',
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  SizedBox(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: passwordController,
-                      hintText: 'Password',
-                      obscureText: true,
-                    ),
-                  ),
-                ],
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            // Input Email or Telephone Number
-            SizedBox(height: 16),
+              SizedBox(
+                height: 8,
+              ),
 
-            // Login Submit button
-            Container(
-              width: 300,
-              height: 45,
-              child: ElevatedButton(
-                onPressed: () {
-                  AuthController.instance.login(
-                    emailController,
-                    passwordController,
-                  );
-                },
-                child: Text(
-                  'Login',
+              // Text: Powered by Vegytably
+              Text('Powered by Veggytably',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  )),
+              SizedBox(height: 42),
 
-            // Text: Don't have an account?
-            SizedBox(
-                width: 219,
-                height: 21,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              Form(
+                child: Column(
                   children: [
-                    Text(
-                      "New user? ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
+                    SizedBox(
+                      width: 300,
+                      child: InputTextField(
+                        textEditingController: emailController,
+                        hintText: 'Email',
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        // TODO: Navigate to Sign Up Page
-                        Get.offAll(() => SignUpPage1(),
-                            transition: Transition.fade);
-                      },
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff356631),
-                          //underline
-                          decoration: TextDecoration.underline,
-                        ),
+                    SizedBox(height: 16),
+                    SizedBox(
+                      width: 300,
+                      child: InputTextField(
+                        textEditingController: passwordController,
+                        hintText: 'Password',
+                        obscureText: true,
                       ),
                     ),
                   ],
-                )),
-            SizedBox(height: 5),
+                ),
+              ),
+              // Input Email or Telephone Number
+              SizedBox(height: 16),
 
-            // Text: Sign Up
-          ]),
+              // Login Submit button
+              Container(
+                width: 300,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () {
+                    AuthController.instance.login(
+                      emailController,
+                      passwordController,
+                    );
+                  },
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xff70cb88),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+
+              // Text: Don't have an account?
+              SizedBox(
+                  width: 219,
+                  height: 21,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "New user? ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // TODO: Navigate to Sign Up Page
+                          Get.offAll(() => SignUpPage1(),
+                              transition: Transition.fade);
+                        },
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff356631),
+                            //underline
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+              SizedBox(height: 5),
+
+              // Text: Sign Up
+            ]),
+          ),
         ),
       ),
     );

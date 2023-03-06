@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart";
 import "package:http/http.dart" as http;
+import "package:veggytably_driver/views/upload_pic.dart";
 
 import "../models/authentication_response.dart";
 import "../models/exception_response.dart";
@@ -61,7 +62,7 @@ class AuthController extends GetxController {
 
       // TODO: Navigate to home page
       Get.offAll(
-        () => HomePageOff(),
+        () => UploadPic(),
         transition: Transition.rightToLeft,
       );
     } catch (e) {

@@ -35,13 +35,13 @@ class SignUpPage1 extends StatelessWidget {
               SizedBox(
                 height: 8,
               ),
-            // Text: Powered by Vegytably
-            Text('Ready to Deliver Food Everywhere and Anywhere!',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                )),
-            SizedBox(height: 38),
+              // Text: Powered by Vegytably
+              Text('Ready to Deliver Food Everywhere and Anywhere!',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  )),
+              SizedBox(height: 38),
               Column(
                 children: [
                   Container(
@@ -76,21 +76,20 @@ class SignUpPage1 extends StatelessWidget {
                       obscureText: true,
                     ),
                   ),
-                ),
-                SizedBox(height: 12),
-                Container(
-                  width: 300,
-                  child: InputTextField(
-                    textEditingController: vehicleType,
-                    hintText: 'Vehicle Type',
+                  SizedBox(height: 12),
+                  Container(
+                    width: 300,
+                    child: InputTextField(
+                      textEditingController: vehicleType,
+                      hintText: 'Vehicle Type',
+                    ),
                   ),
-                ),
-                SizedBox(height: 12),
-                Container(
-                  width: 300,
-                  child: InputTextField(
-                    textEditingController: licensePlateController,
-                    hintText: 'License Plate',
+                  SizedBox(height: 12),
+                  Container(
+                    width: 300,
+                    child: InputTextField(
+                      textEditingController: licensePlateController,
+                      hintText: 'License Plate',
                     ),
                   ),
                 ],

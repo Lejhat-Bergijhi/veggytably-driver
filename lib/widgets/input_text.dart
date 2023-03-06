@@ -3,14 +3,20 @@ import 'package:flutter/material.dart';
 class InputTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
+  final bool? obscureText;
 
-  const InputTextField(this.textEditingController, this.hintText);
+  const InputTextField({
+    Key? key,
+    required this.textEditingController,
+    required this.hintText,
+    this.obscureText = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       //hint text color
-      
+
       controller: textEditingController,
       decoration: InputDecoration(
         //outline color
@@ -25,7 +31,7 @@ class InputTextField extends StatelessWidget {
           color: Color(0xff9f9f9f),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8 ),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     );

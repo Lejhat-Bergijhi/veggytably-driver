@@ -1,82 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:veggytably_driver/controllers/auth_controller.dart';
 import 'package:veggytably_driver/widgets/input_text.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage1 extends StatelessWidget {
+  const SignUpPage1({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.put(AuthController());
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
+      
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: Column(children: [
-            SizedBox(height: 240),
+            SizedBox(height: 75),
 
             // Text: VegyMerch
             Text(
-              'VeggyDriver',
+              'Welcome!',
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 40,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
-              height: 8,
-            ),
+            SizedBox(height: 8,),
 
             // Text: Powered by Vegytably
-            Text('Powered by Veggytably',
+            Text('Ready to Deliver Food Everywhere and Anywhere!',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 )),
-            SizedBox(height: 42),
+            SizedBox(height: 50),
 
-            Form(
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: emailController,
-                      hintText: 'Email',
-                    ),
+            Column(
+              children: [
+                Container(
+                  width: 300,
+                  child: InputTextField(
+                    emailController,
+                    'Name',
                   ),
-                  SizedBox(height: 16),
-                  SizedBox(
-                    width: 300,
-                    child: InputTextField(
-                      textEditingController: passwordController,
-                      hintText: 'Password',
-                      obscureText: true,
-                    ),
+                ),
+                SizedBox(height: 12),
+                Container(
+                  width: 300,
+                  child: InputTextField(
+                    emailController,
+                    'Email',
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: 12),
+                Container(
+                  width: 300,
+                  child: InputTextField(
+                    passwordController,
+                    'Telephone Number',
+                  ),
+                ),
+                SizedBox(height: 12),
+                Container(
+                  width: 300,
+                  child: InputTextField(
+                    emailController,
+                    'Password',
+                  ),
+                ),
+                SizedBox(height: 12),
+                Container(
+                  width: 300,
+                  child: InputTextField(
+                    emailController,
+                    'Licence Plate',
+                  ),
+                ),
+              ],
             ),
             // Input Email or Telephone Number
-            SizedBox(height: 16),
+            SizedBox(height: 12),
 
-            // Login Submit button
+            // Login button
             Container(
               width: 300,
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  authController.login(
-                    emailController,
-                    passwordController,
-                  );
+                  
+                  // emailController.clear();
+                  // passwordController.clear();
                 },
                 child: Text(
-                  'Login',
+                  'Continue',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -98,20 +115,19 @@ class LoginPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "New user? ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+                  Text(
+                    "Already have an account?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
                         fontSize: 15,
-                      ),
                     ),
-                    GestureDetector(
+                  ),
+                   GestureDetector(
                       onTap: () {
-                        // TODO: Navigate to Sign Up Page
                         // Get.offAll(() => SignUpPage(), transition: Transition.fade);
                       },
                       child: Text(
-                        'Sign Up',
+                        'Login',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -121,11 +137,12 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ],
-                )),
+                ],)
+            ),
             SizedBox(height: 5),
 
             // Text: Sign Up
+           
           ]),
         ),
       ),

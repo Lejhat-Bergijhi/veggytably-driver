@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'home_page.dart';
+
 class UploadPic extends StatefulWidget {
   const UploadPic({super.key});
 
@@ -27,10 +29,34 @@ class _UploadPicState extends State<UploadPic> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: TextButton(
+              onPressed: () {
+                Get.offAll(
+                  () => HomePage(),
+                  transition: Transition.rightToLeftWithFade,
+                );
+              },
+              child: Text(
+                "Skip",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 147, 146, 146),
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: Column(children: [
-            SizedBox(height: 120),
+            SizedBox(height: 70),
             Text(
               "Welcome!",
               style: TextStyle(
@@ -82,13 +108,10 @@ class _UploadPicState extends State<UploadPic> {
                           SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            width: 130,
-                            height: 104,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Color(0xffd1d1d6),
-                            ),
+                          // Profile Image preview
+                          Icon(
+                            Icons.image_outlined,
+                            size: 150,
                           ),
                           SizedBox(height: 19),
                           Text(
@@ -99,7 +122,7 @@ class _UploadPicState extends State<UploadPic> {
                             ),
                           ),
                           SizedBox(height: 19),
-                          //  Camera Button
+                          // Camera Button
                           Container(
                             width: MediaQuery.of(context).size.width -
                                 40 * 2 -

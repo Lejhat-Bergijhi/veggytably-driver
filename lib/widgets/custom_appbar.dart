@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'custom_switch.dart';
-import 'package:veggytably_driver/views/home_page_off.dart';
-import 'package:veggytably_driver/views/home_page_on.dart';
 
 class customFloatingAppbar extends StatelessWidget with PreferredSizeWidget {
   bool offline;
@@ -11,13 +9,15 @@ class customFloatingAppbar extends StatelessWidget with PreferredSizeWidget {
   final Color color;
   @override
   final Size preferredSize;
+  final Function() toggleOnline;
 
-  customFloatingAppbar(
-    this.offline,
-    this.title,
-    this.subTitle,
-    this.color,
-  ) : preferredSize = Size.fromHeight(171.0);
+  customFloatingAppbar({
+    required this.offline,
+    required this.title,
+    required this.subTitle,
+    required this.color,
+    required this.toggleOnline,
+  }) : preferredSize = Size.fromHeight(171.0);
 
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +44,7 @@ class customFloatingAppbar extends StatelessWidget with PreferredSizeWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: offline? Colors.white:  Color(0xff356631),
+                      color: offline ? Colors.white : Color(0xff356631),
                       fontSize: 17,
                       fontFamily: "Rubik",
                       fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class customFloatingAppbar extends StatelessWidget with PreferredSizeWidget {
                   Text(
                     subTitle,
                     style: TextStyle(
-                      color: offline? Colors.white:  Colors.black,
+                      color: offline ? Colors.white : Colors.black,
                       fontSize: 12,
                     ),
                   ),
@@ -66,12 +66,7 @@ class customFloatingAppbar extends StatelessWidget with PreferredSizeWidget {
                 child: CustomSwitch(
                   value: offline,
                   onChanged: (bool val) {
-                    offline = !offline;
-                    //change page to home_page_off.dart
-                    if (offline==true) Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePageOff()));
-                    else Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePageOn()));
+                    toggleOnline();
                   },
                 ),
               ),

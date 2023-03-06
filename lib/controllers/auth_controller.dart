@@ -3,12 +3,13 @@ import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart";
 import "package:http/http.dart" as http;
+import "package:veggytably_driver/views/home_page.dart";
 import "package:veggytably_driver/views/upload_pic.dart";
 
 import "../models/authentication_response.dart";
 import "../models/exception_response.dart";
 import "../utils/api.endpoints.dart";
-import "../views/home_page_off.dart";
+import "../views/landing_page.dart";
 import "../views/login_page.dart";
 // import "../views/home_page.dart";
 
@@ -22,6 +23,7 @@ class AuthController extends GetxController {
     TextEditingController phoneController,
     TextEditingController passwordController,
     TextEditingController licensePlateController,
+    TextEditingController vehicleTypeController,
   ) async {
     try {
       var headers = {"Content-Type": "application/json"};
@@ -34,6 +36,7 @@ class AuthController extends GetxController {
         "password": passwordController.text,
         "phone": phoneController.text,
         "licensePlate": licensePlateController.text,
+        "vehicleType": vehicleTypeController.text,
       };
 
       http.Response response = await http.post(
@@ -112,7 +115,7 @@ class AuthController extends GetxController {
 
       // TODO: Navigate to home page
       Get.offAll(
-        () => HomePageOff(),
+        () => LandingPage(),
         transition: Transition.fade,
       );
     } catch (e) {

@@ -14,6 +14,7 @@ class SignUpPage1 extends StatelessWidget {
     TextEditingController phoneController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController licensePlateController = TextEditingController();
+    TextEditingController vehicleType = TextEditingController();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,7 +41,7 @@ class SignUpPage1 extends StatelessWidget {
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 )),
-            SizedBox(height: 50),
+            SizedBox(height: 38),
 
             Column(
               children: [
@@ -80,8 +81,16 @@ class SignUpPage1 extends StatelessWidget {
                 Container(
                   width: 300,
                   child: InputTextField(
+                    textEditingController: vehicleType,
+                    hintText: 'Vehicle Type',
+                  ),
+                ),
+                SizedBox(height: 12),
+                Container(
+                  width: 300,
+                  child: InputTextField(
                     textEditingController: licensePlateController,
-                    hintText: 'Licence Plate',
+                    hintText: 'License Plate',
                   ),
                 ),
               ],

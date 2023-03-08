@@ -43,11 +43,11 @@ class _ImageProfileState extends State<ImageProfile> {
                   leading: const Icon(Icons.camera_alt),
                   title: const Text('Camera'),
                   onTap: () async {
-                    // await takePhoto(ImageSource.camera);
-                    // if (_imageFile == null) print("null");
+                    await takePhoto(ImageSource.camera);
+                    if (_imageFile == null) print("null");
 
                     // upload image
-                    profileController.uploadImage(ImageSource.camera);
+                    // profileController.uploadImage(ImageSource.camera);
                     Get.back();
                   },
                 ),
@@ -70,9 +70,9 @@ class _ImageProfileState extends State<ImageProfile> {
         children: [
           CircleAvatar(
             radius: 48,
-            backgroundImage: profileController.imageFile == null
+            backgroundImage: _imageFile == null
                 ? Image.asset('assets/images/profile.png').image
-                : Image.file(File(profileController.imageFile!.path)).image,
+                : Image.file(File(_imageFile!.path)).image,
           ),
           Positioned(
             bottom: 4,

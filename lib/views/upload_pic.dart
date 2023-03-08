@@ -140,7 +140,7 @@ class _UploadPicState extends State<UploadPic> {
                                 ),
                               ),
                               onPressed: () {
-                                // takePhoto(ImageSource.camera);
+                                takePhoto(ImageSource.camera);
                               },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,

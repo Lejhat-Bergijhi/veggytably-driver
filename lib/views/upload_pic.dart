@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:veggytably_driver/views/landing_page.dart';
 
 import 'home_page.dart';
 
@@ -38,7 +39,7 @@ class _UploadPicState extends State<UploadPic> {
             child: TextButton(
               onPressed: () {
                 Get.offAll(
-                  () => HomePage(),
+                  () => LandingPage(),
                   transition: Transition.rightToLeftWithFade,
                 );
               },
@@ -219,7 +220,7 @@ class _UploadPicState extends State<UploadPic> {
               ),
             ),
             SizedBox(
-              height: 8,
+              height: 16,
             ),
             // Login button
             Container(
@@ -244,41 +245,6 @@ class _UploadPicState extends State<UploadPic> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
-
-            // Text: Don't have an account?
-            SizedBox(
-                width: MediaQuery.of(context).size.width - 40 * 2,
-                height: 21,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an account? ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // Get.offAll(() => SignUpPage(), transition: Transition.fade);
-                      },
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff356631),
-                          //underline
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
-            SizedBox(height: 5),
-
             // Text: Sign Up
           ]),
         ),

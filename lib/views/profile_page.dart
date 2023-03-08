@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:veggytably_driver/controllers/profile_controller.dart';
 import 'package:veggytably_driver/views/login_page.dart';
+
+import '../widgets/image_profile.dart';
 
 class ProfilePageDriver extends StatelessWidget {
   const ProfilePageDriver({super.key});
@@ -11,29 +14,7 @@ class ProfilePageDriver extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Container(
-              padding: const EdgeInsets.only(top: 17.0, left: 17.0),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                  const SizedBox(width: 7.0),
-                  Container(
-                    child: const Text(
-                      "Profile",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ],
-              )),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 38),
           Container(
               height: 205,
               padding: const EdgeInsets.only(left: 78, right: 78),
@@ -41,11 +22,7 @@ class ProfilePageDriver extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        color: Colors.black,
-                        Icons.account_circle_rounded,
-                        size: 70,
-                      ),
+                      ImageProfile(),
                       const SizedBox(
                         height: 12,
                       ),
@@ -115,15 +92,13 @@ class ProfilePageDriver extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    Container(
-                      child: const Icon(Icons.arrow_forward_ios,
-                          size: 17, color: Color(0xFF5F5F5F)),
-                    )
+                    const Icon(Icons.arrow_forward_ios,
+                        size: 17, color: Color(0xFF5F5F5F))
                   ],
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
                       color: Colors.black12,

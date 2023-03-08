@@ -116,7 +116,7 @@ class _SignUpPage1State extends State<SignUpPage> {
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
-                    AuthController.instance.signUp(
+                    AuthController.to.signUp(
                       usernameController,
                       emailController,
                       phoneController,

@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/http.dart' as http;
-
 import '../utils/api.endpoints.dart';
 
 class DriverApi {
@@ -16,8 +14,10 @@ class DriverApi {
     }
 
     try {
-      FormData formData = FormData.fromMap(
-          {"profile-picture": await MultipartFile.fromFile(filePath)});
+      FormData formData = FormData.fromMap({
+        "profile-picture": await MultipartFile.fromFile(filePath,
+            filename: "profile-picture.jpg")
+      });
 
       Response response = await Dio()
           .put(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.uploadImage,
@@ -26,10 +26,7 @@ class DriverApi {
                 headers: <String, String>{
                   "authorization": "Bearer $refreshToken",
                 },
-                responseType: ResponseType.bytes,
               ));
-
-      print("response");
 
       return response;
     } on DioError catch (e) {

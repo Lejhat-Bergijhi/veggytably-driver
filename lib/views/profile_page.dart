@@ -6,7 +6,8 @@ import 'package:veggytably_driver/views/login_page.dart';
 import '../widgets/image_profile.dart';
 
 class ProfilePageDriver extends StatelessWidget {
-  const ProfilePageDriver({super.key});
+  final ProfileController profileController = Get.put(ProfileController());
+  ProfilePageDriver({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,29 +28,25 @@ class ProfilePageDriver extends StatelessWidget {
                         height: 12,
                       ),
                       Container(
-                        child: Text(
-                          "Bambang Subengbengz",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontFamily: "Rubik",
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        child: Obx(() => Text(profileController.username.value,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontFamily: "Rubik",
+                              fontWeight: FontWeight.w500,
+                            ))),
                       ),
                       const SizedBox(
                         height: 6,
                       ),
                       Container(
-                          child: Text(
-                        "+62 89101112131",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontFamily: "Rubik",
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )),
+                          child: Obx(() => Text(profileController.phone.value,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontFamily: "Rubik",
+                                fontWeight: FontWeight.w400,
+                              )))),
                     ]),
               )),
           const SizedBox(height: 20.0),

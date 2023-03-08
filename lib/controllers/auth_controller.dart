@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart";
 import "package:http/http.dart" as http;
+import "package:veggytably_driver/controllers/profile_controller.dart";
 import "package:veggytably_driver/views/home_page.dart";
 import "package:veggytably_driver/views/upload_pic.dart";
 
@@ -14,7 +15,7 @@ import "../views/login_page.dart";
 // import "../views/home_page.dart";
 
 class AuthController extends GetxController {
-  static AuthController instance = Get.put(AuthController());
+  static AuthController to = Get.find();
   final _storage = const FlutterSecureStorage();
 
   Future<void> signUp(
@@ -62,6 +63,8 @@ class AuthController extends GetxController {
           key: "accessToken", value: authenticationResponse.data.accessToken);
       await _storage.write(
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
+
+      ProfileController.to.setUser(authenticationResponse.data.user);
 
       // TODO: Navigate to home page
       Get.offAll(
@@ -112,6 +115,8 @@ class AuthController extends GetxController {
           key: "accessToken", value: authenticationResponse.data.accessToken);
       await _storage.write(
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
+
+      ProfileController.to.setUser(authenticationResponse.data.user);
 
       // TODO: Navigate to home page
       Get.offAll(

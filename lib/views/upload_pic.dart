@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:veggytably_driver/views/landing_page.dart';
 
 import 'home_page.dart';
 
@@ -38,7 +39,7 @@ class _UploadPicState extends State<UploadPic> {
             child: TextButton(
               onPressed: () {
                 Get.offAll(
-                  () => HomePage(),
+                  () => LandingPage(),
                   transition: Transition.rightToLeftWithFade,
                 );
               },
@@ -139,7 +140,7 @@ class _UploadPicState extends State<UploadPic> {
                                 ),
                               ),
                               onPressed: () {
-                                takePhoto(ImageSource.camera);
+                                // takePhoto(ImageSource.camera);
                               },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,

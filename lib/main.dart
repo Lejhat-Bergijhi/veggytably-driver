@@ -20,8 +20,8 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: LoginPage(),
         initialBinding: BindingsBuilder(() {
-          Get.put(ProfileController());
           Get.put(AuthController());
+          // Get.put(ProfileController());
         }));
   }
 }

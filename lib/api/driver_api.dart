@@ -35,4 +35,25 @@ class DriverApi {
       print(e);
     }
   }
+
+  Future<dynamic> getProfilePicture() async {
+    String? refreshToken = await _storage.read(key: "refreshToken");
+
+    if (refreshToken == null) {
+      throw Exception("Refresh token is null");
+    }
+
+    try {
+      Response response = await Dio().get(
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.getProfileImage,
+          options: Options(headers: <String, String>{
+            "authorization": "Bearer $refreshToken",
+          }));
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+    }
+  }
 }

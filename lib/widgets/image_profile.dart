@@ -37,42 +37,44 @@ class ImageProfile extends StatelessWidget {
     }
 
     return Obx(() {
+      print("Loading profile: ${ProfileController.to.isLoading.value}");
       if (ProfileController.to.isLoading.value) {
         return const CircularProgressIndicator();
-      }
-      return Center(
-        child: Stack(
-          children: [
-            Obx(() {
-              if (ProfileController.to.imageData.value.isNotEmpty) {
-                return CircleAvatar(
+      } else {
+        return Center(
+          child: Stack(
+            children: [
+              Obx(() {
+                if (ProfileController.to.imageData.value.isNotEmpty) {
+                  return CircleAvatar(
+                    radius: 48,
+                    backgroundImage:
+                        MemoryImage(ProfileController.to.imageData.value),
+                  );
+                }
+                return const CircleAvatar(
                   radius: 48,
-                  backgroundImage:
-                      MemoryImage(ProfileController.to.imageData.value),
+                  backgroundImage: AssetImage("assets/images/profile.png"),
                 );
-              }
-              return const CircleAvatar(
-                radius: 48,
-                backgroundImage: AssetImage("assets/images/profile.png"),
-              );
-            }),
-            Positioned(
-              bottom: 4,
-              right: 20,
-              child: InkWell(
-                onTap: () {
-                  showModal();
-                },
-                child: const Icon(
-                  Icons.camera_alt,
-                  color: Colors.teal,
-                  size: 28,
+              }),
+              Positioned(
+                bottom: 4,
+                right: 20,
+                child: InkWell(
+                  onTap: () {
+                    showModal();
+                  },
+                  child: const Icon(
+                    Icons.camera_alt,
+                    color: Colors.teal,
+                    size: 28,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      );
+            ],
+          ),
+        );
+      }
     });
   }
 }

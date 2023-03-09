@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:veggytably_driver/controllers/profile_controller.dart';
 //import 'views/home_page.dart';
+import 'controllers/auth_controller.dart';
 import 'views/profile_page.dart';
 import 'package:veggytably_driver/views/login_page.dart';
 
@@ -19,7 +20,8 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: LoginPage(),
         initialBinding: BindingsBuilder(() {
-          Get.put(ProfileController());
+          Get.put(AuthController());
+          // Get.put(ProfileController());
         }));
   }
 }

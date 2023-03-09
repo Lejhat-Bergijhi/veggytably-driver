@@ -1,11 +1,12 @@
 import "dart:convert";
 import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
-import "package:get/get.dart";
-import "package:http/http.dart" as http;
-import "package:veggytably_driver/views/home_page.dart";
+import "package:get/get.dart" hide Response;
+// import "package:http/http.dart" as http;
+import "package:veggytably_driver/controllers/profile_controller.dart";
 import "package:veggytably_driver/views/upload_pic.dart";
-
+import 'package:dio/dio.dart';
+import "../api/auth_api.dart";
 import "../models/authentication_response.dart";
 import "../models/exception_response.dart";
 import "../utils/api.endpoints.dart";
@@ -14,7 +15,7 @@ import "../views/login_page.dart";
 // import "../views/home_page.dart";
 
 class AuthController extends GetxController {
-  static AuthController instance = Get.put(AuthController());
+  static AuthController to = Get.find();
   final _storage = const FlutterSecureStorage();
 
   Future<void> signUp(
@@ -39,30 +40,25 @@ class AuthController extends GetxController {
         "vehicleType": vehicleTypeController.text,
       };
 
-      http.Response response = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode(body),
-      );
-      print(response.body.toString());
+      Response response = await AuthApi.instance.postSignUp(body);
+
+      print(response.data.toString());
       if (response.statusCode != 201) {
-        String errorMessage =
-            ExceptionResponse.getMessage(jsonDecode(response.body));
+        String errorMessage = ExceptionResponse.getMessage(response.data);
         throw Exception(errorMessage);
       }
 
-      final json = jsonDecode(response.body);
-
       AuthenticationResponse authenticationResponse =
-          AuthenticationResponse.fromJson(json);
+          AuthenticationResponse.fromJson(response.data);
 
       print(authenticationResponse.data.toJson());
       // store accessToken and refreshToken in secure storage
       await _storage.write(
-          key: "accessToken", value: authenticationResponse.data.accessToken);
-      await _storage.write(
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
 
+      Get.put(() => ProfileController(), permanent: true);
+
+      ProfileController.to.setUser(authenticationResponse.data.user);
       // TODO: Navigate to home page
       Get.offAll(
         () => UploadPic(),
@@ -79,39 +75,31 @@ class AuthController extends GetxController {
     TextEditingController passwordController,
   ) async {
     try {
-      var headers = {"Content-Type": "application/json"};
-      var url =
-          Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.login);
-
       Map<String, String> body = {
         "email": emailController.text.trim(),
         "password": passwordController.text,
         "role": "DRIVER",
       };
 
-      http.Response response = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode(body),
-      );
-      print(response.body.toString());
+      Response response = await AuthApi.instance.postLogin(body);
+
+      print(response.toString());
 
       if (response.statusCode != 200) {
-        String errorMessage =
-            ExceptionResponse.getMessage(jsonDecode(response.body));
+        String errorMessage = ExceptionResponse.getMessage(response.data);
         throw Exception(errorMessage);
       }
-      final json = jsonDecode(response.body);
 
       AuthenticationResponse authenticationResponse =
-          AuthenticationResponse.fromJson(json);
+          AuthenticationResponse.fromJson(response.data);
 
       print(authenticationResponse.data.toJson());
       // store accessToken and refreshToken in secure storage
       await _storage.write(
-          key: "accessToken", value: authenticationResponse.data.accessToken);
-      await _storage.write(
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
+
+      Get.lazyPut(() => ProfileController(), fenix: true);
+      ProfileController.to.setUser(authenticationResponse.data.user);
 
       // TODO: Navigate to home page
       Get.offAll(
@@ -136,26 +124,21 @@ class AuthController extends GetxController {
         "Content-Type": "application/json",
         "authorization": 'Bearer $refreshToken',
       };
-      var url =
-          Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.logout);
 
-      http.Response response = await http.post(
-        url,
-        headers: headers,
-      );
+      Response response = await AuthApi.instance.postLogout(headers);
+
       if (response.statusCode != 200) {
         // TODO: Create error handler based on status code
-        String errorMessage =
-            ExceptionResponse.getMessage(jsonDecode(response.body));
+        String errorMessage = ExceptionResponse.getMessage(response.data);
         throw Exception(errorMessage);
       }
-      final json = jsonDecode(response.body);
-
       await _storage.delete(key: "refreshToken");
-      await _storage.delete(key: "accessToken");
+
+      // await Get.delete<ProfileController>();
+      ProfileController.to.clear();
 
       Get.offAll(
-        () => LoginPage(),
+        () => const LoginPage(),
         transition: Transition.fade,
       );
     } catch (e) {
@@ -168,9 +151,11 @@ class AuthController extends GetxController {
     try {
       const storage = FlutterSecureStorage();
       String? refreshToken = await storage.read(key: "refreshToken");
+
+      // check expire time of refreshToken
       if (refreshToken == null) {
         Get.offAll(
-          () => LoginPage(),
+          () => const LoginPage(),
           transition: Transition.fade,
         );
       }

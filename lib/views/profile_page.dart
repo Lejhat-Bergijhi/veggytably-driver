@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:veggytably_driver/controllers/profile_controller.dart';
 import 'package:veggytably_driver/views/login_page.dart';
 
+import '../controllers/auth_controller.dart';
 import '../widgets/image_profile.dart';
 
 class ProfilePageDriver extends StatelessWidget {
@@ -18,40 +19,33 @@ class ProfilePageDriver extends StatelessWidget {
           Container(
               height: 205,
               padding: const EdgeInsets.only(left: 78, right: 78),
-              child: Container(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ImageProfile(),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                        child: Text(
-                          "Bambang Subengbengz",
-                          style: TextStyle(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const ImageProfile(),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Container(
+                      child: Obx(() => Text(ProfileController.to.username.value,
+                          style: const TextStyle(
                             color: Colors.black,
-                            fontSize: 17,
+                            fontSize: 20,
                             fontFamily: "Rubik",
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Container(
-                          child: Text(
-                        "+62 89101112131",
-                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ))),
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Obx(() => Text(ProfileController.to.phone.value,
+                        style: const TextStyle(
                           color: Colors.black,
-                          fontSize: 15,
+                          fontSize: 14,
                           fontFamily: "Rubik",
                           fontWeight: FontWeight.w400,
-                        ),
-                      )),
-                    ]),
-              )),
+                        ))),
+                  ])),
           const SizedBox(height: 20.0),
           Container(
               child: ListView(
@@ -60,7 +54,7 @@ class ProfilePageDriver extends StatelessWidget {
             scrollDirection: Axis.vertical,
             children: [
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
                       color: Colors.black12,
@@ -76,7 +70,7 @@ class ProfilePageDriver extends StatelessWidget {
                     left: 24.0, right: 24.0, top: 10, bottom: 10),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.edit,
                       color: Colors.black12,
                       size: 40,
@@ -114,7 +108,7 @@ class ProfilePageDriver extends StatelessWidget {
                     left: 24.0, right: 24.0, top: 10, bottom: 10),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.notifications,
                       color: Colors.black12,
                       size: 40,
@@ -138,7 +132,7 @@ class ProfilePageDriver extends StatelessWidget {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
                       color: Colors.black12,
@@ -154,7 +148,7 @@ class ProfilePageDriver extends StatelessWidget {
                     left: 24.0, right: 24.0, top: 10, bottom: 10),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.analytics,
                       color: Colors.black12,
                       size: 40,
@@ -179,16 +173,34 @@ class ProfilePageDriver extends StatelessWidget {
               ),
             ],
           )),
-          Spacer(),
+          const Spacer(),
           Container(
-              padding: EdgeInsets.only(bottom: 120),
+              padding: const EdgeInsets.only(bottom: 120),
               child: GestureDetector(
                 onTap: () {
-                  // TODO: show modal to confirm logout
-                  //Get.find<AuthController>().logout();
-                  Get.offAll(() => LoginPage());
+                  Get.dialog(
+                    AlertDialog(
+                      title: const Text("Log Out"),
+                      content: const Text("Are you sure you want to log out?"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text("No"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            AuthController.to.logout();
+                          },
+                          child: const Text("Yes"),
+                        ),
+                      ],
+                    ),
+                  );
+                  // AuthController.to.logout();
                 },
-                child: Text(
+                child: const Text(
                   "Log Out",
                   style: TextStyle(
                     color: Color(0xFFD13D34),

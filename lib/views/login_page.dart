@@ -72,7 +72,7 @@ class LoginPage extends StatelessWidget {
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
-                    AuthController.instance.login(
+                    AuthController.to.login(
                       emailController,
                       passwordController,
                     );

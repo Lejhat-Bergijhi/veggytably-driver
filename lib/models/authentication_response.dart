@@ -43,6 +43,7 @@ class User {
   late String id;
   late String username;
   late String email;
+  late String phone;
 
   User({required this.id, required this.username, required this.email});
 
@@ -50,6 +51,7 @@ class User {
     id = json['id'];
     username = json['username'];
     email = json['email'];
+    phone = json['phone'];
   }
 
   Map<String, dynamic> toJson() {
@@ -57,6 +59,7 @@ class User {
     data['id'] = id;
     data['username'] = username;
     data['email'] = email;
+    data['phone'] = phone;
     return data;
   }
 }

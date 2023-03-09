@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:veggytably_driver/controllers/profile_controller.dart';
 import 'package:veggytably_driver/views/profile_page.dart';
 
 import 'home_page.dart';
 
 class LandingPage extends StatelessWidget {
+  ProfileController profileController = Get.find<ProfileController>();
+  // final ProfileController profileController = ProfileController();
   final List<Widget> pages = [
     Placeholder(), // history page
     HomePage(),

@@ -27,13 +27,16 @@ class ProfilePageDriver extends StatelessWidget {
                       height: 12,
                     ),
                     Container(
-                      child: Obx(() => Text(ProfileController.to.username.value,
+                      child: Obx(() => 
+                      Text(ProfileController.to.username.value,
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontFamily: "Rubik",
                             fontWeight: FontWeight.w500,
-                          ))),
+                          )
+                        )
+                      ),
                     ),
                     const SizedBox(
                       height: 6,

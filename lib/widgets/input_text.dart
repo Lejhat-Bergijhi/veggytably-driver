@@ -21,11 +21,11 @@ class InputTextField extends StatelessWidget {
       decoration: InputDecoration(
         //outline color
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff70cb88), width: 1.0),
+          borderSide: BorderSide(color: Color(0xfff6f7fb), width: 1.0),
           borderRadius: BorderRadius.circular(10),
         ),
         filled: true,
-        fillColor: Color(0xff4f9949).withOpacity(0.1),
+        fillColor: Color(0xfff6f7fb).withOpacity(0.1),
         hintText: hintText,
         hintStyle: TextStyle(
           color: Color(0xff9f9f9f),

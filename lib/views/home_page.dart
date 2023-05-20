@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _isOnline = true;
-  bool accepting = true;
+  bool accepting = false;
   bool to_cust = true;
 
   void toggleOnline() {

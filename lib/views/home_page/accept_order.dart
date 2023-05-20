@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'accept_order.dart';
+import 'package:veggytably_driver/widgets/input_text.dart';
 
-class OnlineBody extends StatelessWidget {
-  const OnlineBody({super.key});
+class acceptOrder extends StatelessWidget {
+  const acceptOrder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    TextEditingController foodCodeController = TextEditingController();
+    return new Scaffold(
+        body: Stack(
       //image below
       children: [
         //image
@@ -21,7 +23,7 @@ class OnlineBody extends StatelessWidget {
         ),
         Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Container(
                 width: MediaQuery.of(context).size.width,
                 height: 451,
@@ -237,46 +239,53 @@ class OnlineBody extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(5.0),
-                              child: Table(
-                                border: TableBorder(
-                                    horizontalInside: BorderSide(
-                                        width: 1,
-                                        color: Colors.grey,
-                                        style: BorderStyle.solid)),
-                                children: [
-                                  TableRow(
-                                    children: [
-                                      Text('1x'),
-                                      Text('Sego Thiwul'),
-                                      Text('Rp 3.000'),
-                                    ],
-                                  ),
-                                  TableRow(children: [
-                                    Text('2x'),
-                                    Text('Nasi Liwet'),
-                                    Text('Rp 15.000'),
-                                  ])
-                                ],
-                              ),
-                            )
+                            // Container(
+                            //   padding: EdgeInsets.all(5.0),
+                            //   child: Table(
+                            //     border: TableBorder(
+                            //         horizontalInside: BorderSide(
+                            //             width: 1,
+                            //             color: Colors.grey,
+                            //             style: BorderStyle.solid)),
+                            //     children: [
+                            //       TableRow(
+                            //         children: [
+                            //           Text('1x'),
+                            //           Text('Sego Thiwul'),
+                            //           Text('Rp 3.000'),
+                            //         ],
+                            //       ),
+                            //       TableRow(children: [
+                            //         Text('2x'),
+                            //         Text('Nasi Liwet'),
+                            //         Text('Rp 15.000'),
+                            //       ])
+                            //     ],
+                            //   ),
+                            // )
                           ],
                         ),
                       ),
                       SizedBox(height: 20),
+                      Form(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width - 48,
+                          child: InputTextField2(
+                            textEditingController: foodCodeController,
+                            hintText: 'Enter the 4-digit code',
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 8),
                       Container(
                         width: MediaQuery.of(context).size.width - 48,
                         height: 44,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.offAll(
-                              () => acceptOrder(),
-                              transition: Transition.rightToLeftWithFade,
-                            );
+                            //on pressed
                           },
                           child: Text(
-                            'ACCEPT',
+                            'DELIVER FOOD',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -289,80 +298,12 @@ class OnlineBody extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Container(
-                          height: 44,
-                          width: MediaQuery.of(context).size.width - 48,
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                                height: 44,
-                                width: 74 /
-                                    (312) *
-                                    (MediaQuery.of(context).size.width - 48),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: Color(0xff70cb88),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Text(
-                                  "04:59",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xff70cb88),
-                                    fontSize: 15,
-                                    fontFamily: "Rubik",
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 9 /
-                                    (312) *
-                                    (MediaQuery.of(context).size.width - 48),
-                              ),
-                              Container(
-                                height: 44,
-                                width: 229 /
-                                    (312) *
-                                    (MediaQuery.of(context).size.width - 48),
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    // emailController.clear();
-                                    // passwordController.clear();
-                                  },
-                                  child: Text(
-                                    'DECLINE',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff70cb88),
-                                    ),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    side: BorderSide(
-                                      color: Color(0xff70cb88),
-                                      width: 1,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    primary: Color(0xfff8f8f8),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ))
                     ],
                   ),
                 )),
           ],
         ),
       ],
-    );
+    ));
   }
 }

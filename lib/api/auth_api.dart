@@ -55,4 +55,29 @@ class AuthApi {
       return e;
     }
   }
+
+  Future<dynamic> postVerifyAuth() async {
+    try {
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      var headers = {
+        "Content-Type": "application/json",
+        "authorization": 'Bearer $refreshToken',
+      };
+
+      Response response = await Dio().post(
+        ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.verifyAuth,
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
 }

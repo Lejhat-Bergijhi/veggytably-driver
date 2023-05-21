@@ -11,6 +11,7 @@ class _AuthEndPoints {
   final String logout = "auth/logout";
   final String uploadImage = "auth/profile/upload-profile-picture";
   final String getProfileImage = "auth/profile/fetch-profile-picture";
+  final String verifyAuth = "auth/verify";
 }
 
 class _DriverEndPoints {

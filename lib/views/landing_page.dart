@@ -6,12 +6,12 @@ import 'package:veggytably_driver/views/profile_page.dart';
 import 'home_page.dart';
 
 class LandingPage extends StatelessWidget {
-  ProfileController profileController = Get.find<ProfileController>();
-  // final ProfileController profileController = ProfileController();
+  final ProfileController profileController = Get.find<ProfileController>();
+
   final List<Widget> pages = [
-    Placeholder(), // history page
-    HomePage(),
-    ProfilePageDriver(),
+    const Placeholder(), // history page
+    const HomePage(),
+    const ProfilePageDriver(),
   ];
 
   final RxInt pageIndex = 1.obs;
@@ -26,7 +26,7 @@ class LandingPage extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         height: 82.7,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(16), topLeft: Radius.circular(16)),
           boxShadow: [
@@ -37,14 +37,14 @@ class LandingPage extends StatelessWidget {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(16.0),
             topRight: Radius.circular(16.0),
           ),
           child: BottomNavigationBar(
             currentIndex: pageIndex.value,
             onTap: (index) => pageIndex.value = index,
-            items: <BottomNavigationBarItem>[
+            items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.history_rounded),
                 label: 'History',

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:veggytably_driver/views/home_page/deliver_cust_order_body.dart';
 import 'package:veggytably_driver/views/home_page/deliver_order_body.dart';
 import 'package:veggytably_driver/widgets/custom_appbar.dart';
@@ -39,25 +37,23 @@ class _HomePageState extends State<HomePage> {
           color: _isOnline ? const Color(0xfffffffff) : const Color(0xff70cb88),
           toggleOnline: toggleOnline,
         ),
-        body: _isOnline ? OnlineBody() : OfflineBody(),
+        body: _isOnline ? const OnlineBody() : const OfflineBody(),
       );
     } else {
       if (to_cust) {
-        print("ok");
         _isOnline = true;
         return Scaffold(
             appBar: DeliverToCustAppbar(
               title: _isOnline ? "Online Mode" : "Offline Mode",
             ),
-            body: DeliverCustOrderBody());
+            body: const DeliverCustOrderBody());
       } else {
-        // print("ok");
         _isOnline = true;
         return Scaffold(
             appBar: acceptingAppbar(
               title: _isOnline ? "Online Mode" : "Offline Mode",
             ),
-            body: DeliverOrderBody());
+            body: const DeliverOrderBody());
       }
     }
   }

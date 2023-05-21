@@ -19,11 +19,11 @@ class OnlineBody extends StatelessWidget {
         ),
         Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Container(
                 width: MediaQuery.of(context).size.width,
                 height: 451,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   //border top left radius
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16.0),
@@ -39,23 +39,23 @@ class OnlineBody extends StatelessWidget {
                   color: Color(0xfff8f8f8),
                 ),
                 child: Container(
-                  padding: EdgeInsets.only(left: 24, right: 24),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Center(
                         child: Container(
                           width: 100,
                           height: 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Color(0xffd1d1d6),
+                            color: const Color(0xffd1d1d6),
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -66,12 +66,12 @@ class OnlineBody extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.account_circle_outlined,
                                   color: Color(0xffd1d1d6),
                                   size: 44,
                                 )),
-                            SizedBox(width: 12),
+                            const SizedBox(width: 12),
                             Container(
                               width: MediaQuery.of(context).size.width - 110,
                               child: Row(
@@ -85,7 +85,7 @@ class OnlineBody extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Suwarni Ani",
                                           style: TextStyle(
                                             color: Colors.black,
@@ -94,12 +94,12 @@ class OnlineBody extends StatelessWidget {
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                        SizedBox(height: 4),
+                                        const SizedBox(height: 4),
                                         Container(
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(14),
-                                            color: Color(0xfffee7a2),
+                                            color: const Color(0xfffee7a2),
                                           ),
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 8,
@@ -112,7 +112,7 @@ class OnlineBody extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
+                                              const Text(
                                                 "Domvet Payment",
                                                 style: TextStyle(
                                                   color: Colors.black,
@@ -132,15 +132,15 @@ class OnlineBody extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Rp25.000,00",
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
                                           ),
                                         ),
-                                        SizedBox(height: 8),
-                                        Text(
+                                        const SizedBox(height: 8),
+                                        const Text(
                                           "4.47 KM",
                                           style: TextStyle(
                                             color: Colors.black,
@@ -156,13 +156,13 @@ class OnlineBody extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 18),
+                      const SizedBox(height: 18),
                       Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "TITIK JEMPUT",
                               style: TextStyle(
                                 color: Color(0xff9f9f9f),
@@ -171,8 +171,8 @@ class OnlineBody extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            SizedBox(height: 6),
-                            Text(
+                            const SizedBox(height: 6),
+                            const Text(
                               "RM Jaya Sujaya Makmur Abadi 88",
                               style: TextStyle(
                                 color: Colors.black,
@@ -181,8 +181,8 @@ class OnlineBody extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            SizedBox(height: 6),
-                            Text(
+                            const SizedBox(height: 6),
+                            const Text(
                               "Jl. Raden Bagus Bege, No.15A, Pogung",
                               style: TextStyle(
                                 color: Colors.black,
@@ -192,14 +192,14 @@ class OnlineBody extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Container(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "TITIK ANTAR",
                               style: TextStyle(
                                 color: Color(0xff9f9f9f),
@@ -208,8 +208,8 @@ class OnlineBody extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            SizedBox(height: 6),
-                            Text(
+                            const SizedBox(height: 6),
+                            const Text(
                               "Makmur Residence",
                               style: TextStyle(
                                 color: Colors.black,
@@ -218,8 +218,8 @@ class OnlineBody extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            SizedBox(height: 6),
-                            Text(
+                            const SizedBox(height: 6),
+                            const Text(
                               "Blok F No.17, Kasihan, Bantul",
                               style: TextStyle(
                                 color: Colors.black,
@@ -229,7 +229,7 @@ class OnlineBody extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Container(
                         width: MediaQuery.of(context).size.width - 48,
                         height: 44,
@@ -238,28 +238,28 @@ class OnlineBody extends StatelessWidget {
                             // emailController.clear();
                             // passwordController.clear();
                           },
-                          child: Text(
+                          child: const Text(
                             'ACCEPT',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Color(0xff70cb88),
+                            primary: const Color(0xff70cb88),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Container(
                           height: 44,
                           width: MediaQuery.of(context).size.width - 48,
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   vertical: 12,
                                 ),
                                 height: 44,
@@ -269,11 +269,11 @@ class OnlineBody extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
-                                    color: Color(0xff70cb88),
+                                    color: const Color(0xff70cb88),
                                     width: 1,
                                   ),
                                 ),
-                                child: Text(
+                                child: const Text(
                                   "04:59",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -299,7 +299,7 @@ class OnlineBody extends StatelessWidget {
                                     // emailController.clear();
                                     // passwordController.clear();
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'DECLINE',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -307,14 +307,14 @@ class OnlineBody extends StatelessWidget {
                                     ),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                    side: BorderSide(
+                                    side: const BorderSide(
                                       color: Color(0xff70cb88),
                                       width: 1,
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                     ),
-                                    primary: Color(0xfff8f8f8),
+                                    primary: const Color(0xfff8f8f8),
                                   ),
                                 ),
                               ),

@@ -1,8 +1,6 @@
-import "dart:convert";
 import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart" hide Response;
-// import "package:http/http.dart" as http;
 import "package:veggytably_driver/controllers/profile_controller.dart";
 import "package:veggytably_driver/views/upload_pic.dart";
 import 'package:dio/dio.dart';
@@ -17,6 +15,40 @@ import "../views/login_page.dart";
 class AuthController extends GetxController {
   static AuthController to = Get.find();
   final _storage = const FlutterSecureStorage();
+
+  final Rx<User> _user = User(
+    id: "",
+    username: "",
+    email: "",
+    phone: "",
+  ).obs;
+
+  RxBool isLogin = false.obs;
+  RxBool isLoading = false.obs;
+
+  User get user => _user.value;
+
+  @override
+  void onReady() {
+    super.onReady();
+    // TODO uncomment code if ready to implement
+    checkAuth();
+    ever(isLogin, _initialScreen);
+  }
+
+  void _initialScreen(bool isLogin) {
+    if (isLogin) {
+      Get.offAll(
+        () => LandingPage(),
+        transition: Transition.rightToLeft,
+      );
+    } else {
+      Get.offAll(
+        () => const LoginPage(),
+        transition: Transition.rightToLeft,
+      );
+    }
+  }
 
   Future<void> signUp(
     TextEditingController usernameController,
@@ -147,21 +179,50 @@ class AuthController extends GetxController {
     }
   }
 
-  static Future<void> checkAuth() async {
+  Future<void> checkAuth() async {
     try {
-      const storage = FlutterSecureStorage();
-      String? refreshToken = await storage.read(key: "refreshToken");
+      String? refreshToken = await _storage.read(key: "refreshToken");
 
       // check expire time of refreshToken
       if (refreshToken == null) {
-        Get.offAll(
-          () => const LoginPage(),
-          transition: Transition.fade,
-        );
+        clearUser();
+        return;
       }
+      // verify refreshToken
+      Response response = await AuthApi.instance.postVerifyAuth();
+
+      if (response.statusCode != 200) {
+        if (response.statusCode == 401) {
+          clearUser();
+        }
+
+        String errorMessage = ExceptionResponse.getMessage(response.data);
+        throw Exception(errorMessage);
+      }
+
+      User user = User.fromJson(response.data["data"]["user"]);
+
+      setUser(user);
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());
     }
+  }
+
+  void setUser(User u) {
+    _user.value = u;
+    isLogin.value = true;
+    update();
+  }
+
+  void clearUser() {
+    _user.value = User(
+      id: "",
+      username: "",
+      email: "",
+      phone: "",
+    );
+    isLogin.value = false;
+    update();
   }
 }

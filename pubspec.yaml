@@ -11,10 +11,12 @@ dependencies:
   dotted_border: ^2.0.0+3
   flutter:
     sdk: flutter
+  flutter_map: ^4.0.0
   flutter_secure_storage: ^8.0.0
   get: ^4.6.5
   http: ^0.13.5
   image_picker: ^0.8.6+4
+  latlong2: ^0.9.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

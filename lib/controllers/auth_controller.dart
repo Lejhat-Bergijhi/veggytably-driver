@@ -10,6 +10,7 @@ import "../models/exception_response.dart";
 import "../utils/api.endpoints.dart";
 import "../views/landing_page.dart";
 import "../views/login_page.dart";
+import "../views/map_page.dart";
 // import "../views/home_page.dart";
 
 class AuthController extends GetxController {
@@ -39,7 +40,8 @@ class AuthController extends GetxController {
   void _initialScreen(bool isLogin) {
     if (isLogin) {
       Get.offAll(
-        () => LandingPage(),
+        // () => LandingPage(),
+        () => MapPage(),
         transition: Transition.rightToLeft,
       );
     } else {

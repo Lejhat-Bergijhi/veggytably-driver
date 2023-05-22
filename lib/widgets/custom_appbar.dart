@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:veggytably_driver/utils/socket_service.dart';
 import 'custom_switch.dart';
 
 class CustomFloatingAppbar extends StatelessWidget
@@ -12,20 +12,21 @@ class CustomFloatingAppbar extends StatelessWidget
   final Size preferredSize;
   final Function() toggleOnline;
 
-  CustomFloatingAppbar({
+  const CustomFloatingAppbar({
+    super.key,
     required this.offline,
     required this.title,
     required this.subTitle,
     required this.color,
     required this.toggleOnline,
-  }) : preferredSize = Size.fromHeight(171.0);
+  }) : preferredSize = const Size.fromHeight(171.0);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         //transparent
         color: Colors.transparent,
-        padding: EdgeInsets.only(top: 30, left: 30, right: 30),
+        padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
         child: Container(
           height: 60,
           decoration: BoxDecoration(
@@ -46,7 +47,7 @@ class CustomFloatingAppbar extends StatelessWidget
                   Text(
                     title,
                     style: TextStyle(
-                      color: offline ? Colors.white : Color(0xff356631),
+                      color: offline ? Colors.white : const Color(0xff356631),
                       fontSize: 17,
                       fontFamily: "Rubik",
                       fontWeight: FontWeight.bold,
@@ -64,13 +65,17 @@ class CustomFloatingAppbar extends StatelessWidget
               //cupertino switch
               const Spacer(),
 
-              Container(
-                child: CustomSwitch(
-                  value: offline,
-                  onChanged: (bool val) {
-                    toggleOnline();
-                  },
-                ),
+              CustomSwitch(
+                value: offline,
+                onChanged: (bool val) {
+                  toggleOnline();
+                  // connect to socket
+                  if (!val) {
+                    SocketService().connect();
+                  } else {
+                    SocketService().disconnect();
+                  }
+                },
               ),
             ],
           ),

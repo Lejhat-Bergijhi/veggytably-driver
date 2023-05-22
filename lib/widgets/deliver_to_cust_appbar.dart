@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 class DeliverToCustAppbar extends StatelessWidget
     implements PreferredSizeWidget {
-  final String title;
   @override
   final Size preferredSize;
 
-  DeliverToCustAppbar({
-    required this.title,
-  }) : preferredSize = Size.fromHeight(171.0);
+  const DeliverToCustAppbar({super.key})
+      : preferredSize = const Size.fromHeight(171.0);
 
   Widget build(BuildContext context) {
     return Container(

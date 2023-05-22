@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AcceptingAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
   @override
   final Size preferredSize;
 
   const AcceptingAppbar({
     super.key,
-    required this.title,
   }) : preferredSize = const Size.fromHeight(171.0);
 
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class AcceptingAppbar extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.white,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 19),
-          child: Text(
+          child: const Text(
             "Heading To The Restaurant",
             textAlign: TextAlign.center,
             style: TextStyle(

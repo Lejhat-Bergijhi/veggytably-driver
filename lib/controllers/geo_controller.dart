@@ -3,6 +3,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:veggytably_driver/utils/geolocator_service.dart';
 
 class GeoController extends GetxController {
+  static GeoController to = Get.find();
   // store the current position
   final Rx<LatLng> _currentPosition = Rx<LatLng>(LatLng(0, 0));
 

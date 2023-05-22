@@ -16,7 +16,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchImage();
+    // fetchImage();
   }
 
   void uploadImage(ImageSource imageSource) async {
@@ -57,7 +57,6 @@ class ProfileController extends GetxController {
       isLoading(true);
       update();
       var response = await DriverApi.instance.getProfilePicture();
-      print(response.toString());
       if (response.statusCode == 200) {
         if (!response.data['data']['isFound']) {
           return;

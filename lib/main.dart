@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'controllers/auth_controller.dart';
 import 'package:veggytably_driver/views/login_page.dart';
 
+import 'controllers/geo_controller.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -19,6 +21,7 @@ class MainApp extends StatelessWidget {
         home: const LoginPage(),
         initialBinding: BindingsBuilder(() {
           Get.put(AuthController());
+          Get.put(GeoController());
         }));
   }
 }

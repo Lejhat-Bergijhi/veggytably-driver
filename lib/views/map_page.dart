@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../controllers/map_controller.dart';
+import '../controllers/geo_controller.dart';
 
 class MapPage extends StatelessWidget {
   final GeoController geoController = Get.put(GeoController());

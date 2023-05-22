@@ -16,9 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _isOnline = true;
-  bool accepting = false;
-  bool to_cust = true;
+  bool _isOnline = false;
+  bool isAccepted = false;
 
   void toggleOnline() {
     setState(() {
@@ -28,7 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (!accepting) {
+    if (!isAccepted) {
       return Scaffold(
         appBar: CustomFloatingAppbar(
           offline: !_isOnline,
@@ -40,20 +39,18 @@ class _HomePageState extends State<HomePage> {
         body: _isOnline ? const OnlineBody() : const OfflineBody(),
       );
     } else {
-      if (to_cust) {
+      if (isAccepted) {
         _isOnline = true;
-        return Scaffold(
-            appBar: DeliverToCustAppbar(
-              title: _isOnline ? "Online Mode" : "Offline Mode",
-            ),
-            body: const DeliverCustOrderBody());
+        return const Scaffold(
+          appBar: DeliverToCustAppbar(),
+          body: DeliverCustOrderBody(),
+        );
       } else {
         _isOnline = true;
-        return Scaffold(
-            appBar: AcceptingAppbar(
-              title: _isOnline ? "Online Mode" : "Offline Mode",
-            ),
-            body: const DeliverOrderBody());
+        return const Scaffold(
+          appBar: AcceptingAppbar(),
+          body: DeliverOrderBody(),
+        );
       }
     }
   }

@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:veggytably_driver/widgets/input_text.dart';
 
 class SignUpPage2 extends StatelessWidget {
   const SignUpPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
     return Scaffold(
-      
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
@@ -26,7 +20,9 @@ class SignUpPage2 extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
 
             // Text: Powered by Vegytably
             Text('Ready to Deliver Food Everywhere and Anywhere!',
@@ -55,7 +51,7 @@ class SignUpPage2 extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 )),
             SizedBox(height: 7),
-           
+
             Container(
               padding: const EdgeInsets.only(
                   left: 130.0, right: 90.0, top: 10, bottom: 10),
@@ -105,8 +101,6 @@ class SignUpPage2 extends StatelessWidget {
                 ],
               ),
             ),
-            
-            
 
             // Login button
             Container(
@@ -114,14 +108,9 @@ class SignUpPage2 extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  
                   // emailController.clear();
                   // passwordController.clear();
                 },
-
-                
-
-
                 child: Text(
                   'Continue',
                   style: TextStyle(
@@ -145,14 +134,14 @@ class SignUpPage2 extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Text(
-                    "Already have an account?",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
+                    Text(
+                      "Already have an account?",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
                         fontSize: 15,
+                      ),
                     ),
-                  ),
-                   GestureDetector(
+                    GestureDetector(
                       onTap: () {
                         // Get.offAll(() => SignUpPage(), transition: Transition.fade);
                       },
@@ -167,12 +156,11 @@ class SignUpPage2 extends StatelessWidget {
                         ),
                       ),
                     ),
-                ],)
-            ),
+                  ],
+                )),
             SizedBox(height: 5),
 
             // Text: Sign Up
-           
           ]),
         ),
       ),

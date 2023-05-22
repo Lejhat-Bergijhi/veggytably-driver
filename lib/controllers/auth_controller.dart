@@ -7,7 +7,6 @@ import 'package:dio/dio.dart';
 import "../api/auth_api.dart";
 import "../models/authentication_response.dart";
 import "../models/exception_response.dart";
-import "../utils/api.endpoints.dart";
 import "../views/landing_page.dart";
 import "../views/login_page.dart";
 import "../views/map_page.dart";
@@ -61,10 +60,6 @@ class AuthController extends GetxController {
     TextEditingController vehicleTypeController,
   ) async {
     try {
-      var headers = {"Content-Type": "application/json"};
-      var url =
-          Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.signUp);
-
       Map<String, String> body = {
         "username": usernameController.text,
         "email": emailController.text.trim(),

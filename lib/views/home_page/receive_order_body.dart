@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class ReceiveOrderBody extends StatelessWidget {
   const ReceiveOrderBody({super.key});
@@ -17,7 +15,7 @@ class ReceiveOrderBody extends StatelessWidget {
                   image: Image.asset("assets/images/Background1.png").image,
                   fit: BoxFit.cover)),
         ),
-        
+
         Column(
           children: [
             Spacer(),
@@ -231,7 +229,6 @@ class ReceiveOrderBody extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20),
-
                       Container(
                         width: MediaQuery.of(context).size.width - 48,
                         height: 44,
@@ -266,8 +263,14 @@ class ReceiveOrderBody extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                              width: 72 / 312 * (MediaQuery.of(context).size.width - 48),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 16, vertical: 8),
+                                              width: 72 /
+                                                  312 *
+                                                  (MediaQuery.of(context)
+                                                          .size
+                                                          .width -
+                                                      48),
                                               child: Text(
                                                 "1x",
                                                 textAlign: TextAlign.center,
@@ -278,8 +281,14 @@ class ReceiveOrderBody extends StatelessWidget {
                                               ),
                                             ),
                                             Container(
-                                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                              width: 88 / 312 * (MediaQuery.of(context).size.width - 48),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 16, vertical: 8),
+                                              width: 88 /
+                                                  312 *
+                                                  (MediaQuery.of(context)
+                                                          .size
+                                                          .width -
+                                                      48),
                                               child: Text(
                                                 "Sego Tiwul",
                                                 style: TextStyle(
@@ -289,8 +298,14 @@ class ReceiveOrderBody extends StatelessWidget {
                                               ),
                                             ),
                                             Container(
-                                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                              width: 72 / 312 * (MediaQuery.of(context).size.width - 48),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 16, vertical: 8),
+                                              width: 72 /
+                                                  312 *
+                                                  (MediaQuery.of(context)
+                                                          .size
+                                                          .width -
+                                                      48),
                                               child: Text(
                                                 "Rp3.000",
                                                 textAlign: TextAlign.right,
@@ -323,10 +338,8 @@ class ReceiveOrderBody extends StatelessWidget {
                             ),
                           ),
                         ),
-
                       ),
                       SizedBox(height: 8),
-
                       AcceptDecline(),
                     ],
                   ),
@@ -345,97 +358,93 @@ class AcceptDecline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Container(
-      width: MediaQuery.of(context).size.width - 48,
-      height: 44,
-      child: ElevatedButton(
-        onPressed: () {
-          // emailController.clear();
-          // passwordController.clear();
-        },
-        child: Text(
-          'ACCEPT',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        style: ElevatedButton.styleFrom(
-          primary: Color(0xff70cb88),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-      ),
-    ),
-    SizedBox(height: 8),
-    Container(
-        height: 44,
-        width: MediaQuery.of(context).size.width - 48,
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 12,
+    return Column(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width - 48,
+          height: 44,
+          child: ElevatedButton(
+            onPressed: () {
+              // emailController.clear();
+              // passwordController.clear();
+            },
+            child: Text(
+              'ACCEPT',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
               ),
-              height: 44,
-              width: 74 /
-                  (312) *
-                  (MediaQuery.of(context).size.width - 48),
-              decoration: BoxDecoration(
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: Color(0xff70cb88),
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: Color(0xff70cb88),
-                  width: 1,
-                ),
-              ),
-              child: Text(
-                "04:59",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xff70cb88),
-                  fontSize: 15,
-                  fontFamily: "Rubik",
-                  fontWeight: FontWeight.w600,
-                ),
               ),
             ),
-            SizedBox(
-              width: 9 /
-                  (312) *
-                  (MediaQuery.of(context).size.width - 48),
-            ),
-            Container(
-              height: 44,
-              width: 229 /
-                  (312) *
-                  (MediaQuery.of(context).size.width - 48),
-              child: ElevatedButton(
-                onPressed: () {
-                  // emailController.clear();
-                  // passwordController.clear();
-                },
-                child: Text(
-                  'DECLINE',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff70cb88),
+          ),
+        ),
+        SizedBox(height: 8),
+        Container(
+            height: 44,
+            width: MediaQuery.of(context).size.width - 48,
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 12,
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide(
-                    color: Color(0xff70cb88),
-                    width: 1,
-                  ),
-                  shape: RoundedRectangleBorder(
+                  height: 44,
+                  width: 74 / (312) * (MediaQuery.of(context).size.width - 48),
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: Color(0xff70cb88),
+                      width: 1,
+                    ),
                   ),
-                  primary: Color(0xfff8f8f8),
+                  child: Text(
+                    "04:59",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xff70cb88),
+                      fontSize: 15,
+                      fontFamily: "Rubik",
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
-        ))
-    ],);
+                SizedBox(
+                  width: 9 / (312) * (MediaQuery.of(context).size.width - 48),
+                ),
+                Container(
+                  height: 44,
+                  width: 229 / (312) * (MediaQuery.of(context).size.width - 48),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // emailController.clear();
+                      // passwordController.clear();
+                    },
+                    child: Text(
+                      'DECLINE',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff70cb88),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      side: BorderSide(
+                        color: Color(0xff70cb88),
+                        width: 1,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      primary: Color(0xfff8f8f8),
+                    ),
+                  ),
+                ),
+              ],
+            ))
+      ],
+    );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:veggytably_driver/views/home_page/deliver_cust_order_body.dart';
 import 'package:veggytably_driver/views/home_page/deliver_order_body.dart';
-import 'package:veggytably_driver/widgets/custom_appbar.dart';
 import 'package:veggytably_driver/widgets/accepting_appbar.dart';
 import 'package:veggytably_driver/widgets/deliver_to_cust_appbar.dart';
 
+import '../widgets/custom_appbar.dart';
 import 'home_page/offline_body.dart';
 import 'home_page/online_body.dart';
 
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if (!accepting) {
       return Scaffold(
-        appBar: customFloatingAppbar(
+        appBar: CustomFloatingAppbar(
           offline: !_isOnline,
           title: _isOnline ? "Online Mode" : "Offline Mode",
           subTitle: 'Home',
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       } else {
         _isOnline = true;
         return Scaffold(
-            appBar: acceptingAppbar(
+            appBar: AcceptingAppbar(
               title: _isOnline ? "Online Mode" : "Offline Mode",
             ),
             body: const DeliverOrderBody());

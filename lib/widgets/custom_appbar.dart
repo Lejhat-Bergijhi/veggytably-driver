@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'custom_switch.dart';
 
-class customFloatingAppbar extends StatelessWidget with PreferredSizeWidget {
-  bool offline;
+class CustomFloatingAppbar extends StatelessWidget
+    implements PreferredSizeWidget {
+  final bool offline;
   final String title;
   final String subTitle;
   final Color color;
@@ -11,7 +12,7 @@ class customFloatingAppbar extends StatelessWidget with PreferredSizeWidget {
   final Size preferredSize;
   final Function() toggleOnline;
 
-  customFloatingAppbar({
+  CustomFloatingAppbar({
     required this.offline,
     required this.title,
     required this.subTitle,
@@ -19,6 +20,7 @@ class customFloatingAppbar extends StatelessWidget with PreferredSizeWidget {
     required this.toggleOnline,
   }) : preferredSize = Size.fromHeight(171.0);
 
+  @override
   Widget build(BuildContext context) {
     return Container(
         //transparent

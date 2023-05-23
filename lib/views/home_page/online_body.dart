@@ -60,7 +60,6 @@ class OnlineBody extends StatelessWidget {
                           children: [
                             Container(
                                 //outline
-
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -70,7 +69,7 @@ class OnlineBody extends StatelessWidget {
                                   size: 44,
                                 )),
                             const SizedBox(width: 12),
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width - 110,
                               child: Row(
                                 mainAxisAlignment:
@@ -228,7 +227,7 @@ class OnlineBody extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width - 48,
                         height: 44,
                         child: ElevatedButton(
@@ -251,7 +250,7 @@ class OnlineBody extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Container(
+                      SizedBox(
                           height: 44,
                           width: MediaQuery.of(context).size.width - 48,
                           child: Row(
@@ -287,7 +286,7 @@ class OnlineBody extends StatelessWidget {
                                     (312) *
                                     (MediaQuery.of(context).size.width - 48),
                               ),
-                              Container(
+                              SizedBox(
                                 height: 44,
                                 width: 229 /
                                     (312) *

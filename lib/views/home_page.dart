@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:veggytably_driver/views/home_page/deliver_cust_order_body.dart';
 import 'package:veggytably_driver/views/home_page/deliver_order_body.dart';
+import 'package:veggytably_driver/views/map_page.dart';
 import 'package:veggytably_driver/widgets/accepting_appbar.dart';
 import 'package:veggytably_driver/widgets/deliver_to_cust_appbar.dart';
 
@@ -36,7 +37,8 @@ class _HomePageState extends State<HomePage> {
           color: _isOnline ? const Color(0xfffffffff) : const Color(0xff70cb88),
           toggleOnline: toggleOnline,
         ),
-        body: _isOnline ? const OnlineBody() : const OfflineBody(),
+        // body: _isOnline ? const OnlineBody() : const OfflineBody(),
+        body: _isOnline ? MapPage() : const OfflineBody(),
       );
     } else {
       if (isAccepted) {
@@ -54,4 +56,34 @@ class _HomePageState extends State<HomePage> {
       }
     }
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   if (!isAccepted) {
+  //     return Scaffold(
+  //       appBar: CustomFloatingAppbar(
+  //         offline: !_isOnline,
+  //         title: _isOnline ? "Online Mode" : "Offline Mode",
+  //         subTitle: 'Home',
+  //         color: _isOnline ? const Color(0xfffffffff) : const Color(0xff70cb88),
+  //         toggleOnline: toggleOnline,
+  //       ),
+  //       body: _isOnline ? const OnlineBody() : const OfflineBody(),
+  //     );
+  //   } else {
+  //     if (isAccepted) {
+  //       _isOnline = true;
+  //       return const Scaffold(
+  //         appBar: DeliverToCustAppbar(),
+  //         body: DeliverCustOrderBody(),
+  //       );
+  //     } else {
+  //       _isOnline = true;
+  //       return const Scaffold(
+  //         appBar: AcceptingAppbar(),
+  //         body: DeliverOrderBody(),
+  //       );
+  //     }
+  //   }
+  // }
 }

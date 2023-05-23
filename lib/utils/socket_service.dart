@@ -1,10 +1,10 @@
 // ignore: library_prefixes
-import 'package:flutter_map/flutter_map.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:veggytably_driver/controllers/auth_controller.dart';
 import 'package:veggytably_driver/controllers/geo_controller.dart';
 import 'package:veggytably_driver/utils/api.endpoints.dart';
 
+import '../controllers/order_controller.dart';
 import '../models/transaction_model.dart';
 
 class SocketService {
@@ -60,8 +60,13 @@ class SocketService {
       socket.emit('handshake', response);
     });
 
-    socket.on('transaction', (data) {
+    socket.on('newOrder', (data) {
       print(data);
+      // parse data
+      Transaction transaction = Transaction.fromJson(data);
+      // set new order received to true in order controller
+      // OrderController.to.setOrder(transaction);
+      OrderController.to.receiveOrder(transaction);
     });
 
     socket.onDisconnect((_) => print('disconnect'));

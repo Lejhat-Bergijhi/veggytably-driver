@@ -9,7 +9,6 @@ import "../models/authentication_response.dart";
 import "../models/exception_response.dart";
 import "../views/landing_page.dart";
 import "../views/login_page.dart";
-import "../views/map_page.dart";
 
 class AuthController extends GetxController {
   static AuthController to = Get.find();

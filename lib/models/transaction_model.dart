@@ -83,9 +83,9 @@ class Address {
 }
 
 class Transaction {
-  late Route route;
-  late double distance;
-  late double duration;
+  late Map<String, Route> routes;
+  // late double distance;
+  // late double duration;
   late Address merchantAddress;
   late Address customerAddress;
   late List<Order> orderList;
@@ -94,9 +94,9 @@ class Transaction {
   late String customerName;
 
   Transaction({
-    required this.route,
-    required this.distance,
-    required this.duration,
+    required this.routes,
+    // required this.distance,
+    // required this.duration,
     required this.merchantAddress,
     required this.customerAddress,
     required this.orderList,
@@ -106,13 +106,18 @@ class Transaction {
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
-    var route = json['route'].toList();
-    route = Route.fromJsonList(route);
+    var routes = json['routes'];
+
+    var driverToMerchant = routes['driverToMerchant'];
+    var merchantToCustomer = routes['merchantToCustomer'];
+
+    routes = {
+      'driverToMerchant': Route.fromJson(driverToMerchant),
+      'merchantToCustomer': Route.fromJson(merchantToCustomer),
+    };
 
     return Transaction(
-      route: route,
-      distance: json['distance']?.toDouble() ?? 0.0,
-      duration: json['duration']?.toDouble() ?? 0.0,
+      routes: routes,
       merchantAddress: Address.fromJson(json['merchantAddress']),
       customerAddress: Address.fromJson(json['customerAddress']),
       orderList: Order.fromJsonList(json['orderList']),
@@ -124,42 +129,41 @@ class Transaction {
 
   @override
   String toString() {
-    return 'Transaction{route: $route, distance: $distance, duration: $duration, merchantAddress: $merchantAddress, customerAddress: $customerAddress, orderList: $orderList, paymentMethod: $paymentMethod, totalPrice: $totalPrice}';
+    return 'Transaction{routes: $routes, merchantAddress: $merchantAddress, customerAddress: $customerAddress, orderList: $orderList, paymentMethod: $paymentMethod, totalPrice: $totalPrice, customerName: $customerName}';
   }
 }
 
 class Route {
-  late List<LatLng> route;
+  late List<LatLng> coordinates;
+  late double distance;
+  late double duration;
 
   Route({
-    required this.route,
+    required this.coordinates,
+    required this.distance,
+    required this.duration,
   });
 
   factory Route.fromJson(Map<String, dynamic> json) {
-    var route = (json['route'] as List<dynamic>)
-        .map((e) => LatLng(e['latitude'], e['longitude']))
-        .toList();
+    var coordinates = coordinatesFromJsonList(json['coordinates']);
 
-    return Route(route: route);
+    return Route(
+      coordinates: coordinates,
+      distance: json['distance']?.toDouble() ?? 0.0,
+      duration: json['duration']?.toDouble() ?? 0.0,
+    );
   }
 
-  factory Route.fromJsonList(List<dynamic> jsonList) {
-    var route = jsonList.map((e) {
-      print(e);
+  static List<LatLng> coordinatesFromJsonList(List<dynamic> jsonList) {
+    var routes = jsonList.map((e) {
       return LatLng(e[1], e[0]);
     }).toList();
-    return Route(route: route);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['route'] = route.map((e) => e.toJson()).toList();
-    return data;
+    return routes;
   }
 
   @override
   String toString() {
-    return 'Route{route: $route}';
+    return 'Route{coordinates: $coordinates, distance: $distance, duration: $duration}';
   }
 }
 

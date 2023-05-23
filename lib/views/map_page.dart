@@ -16,70 +16,99 @@ class MapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        FlutterMap(
-          options: MapOptions(
-            center: LatLng(-7.758668, 110.3806492),
-            zoom: 13.0,
-          ),
-          children: [
-            // Map Layer
-            TileLayer(
-              urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-              userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+        GetBuilder<OrderController>(builder: (controller) {
+          var currentPosition = geoController.currentPosition;
+          var markers = <Marker>[];
+          var points = <LatLng>[];
+
+          if (controller.receivedOrder != null) {
+            // markers
+            Marker merchantMarker = Marker(
+              point: LatLng(
+                controller.receivedOrder!.merchantAddress.latitude,
+                controller.receivedOrder!.merchantAddress.longitude,
+              ),
+              builder: (context) => IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.location_on),
+                color: Colors.green,
+                iconSize: 45,
+              ),
+            );
+
+            Marker customerMarker = Marker(
+              point: LatLng(
+                controller.receivedOrder!.customerAddress.latitude,
+                controller.receivedOrder!.customerAddress.longitude,
+              ),
+              builder: (context) => IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.location_on),
+                color: Colors.red,
+                iconSize: 45,
+              ),
+            );
+
+            markers.add(merchantMarker);
+            markers.add(customerMarker);
+            // routes
+            var driverToMerchant =
+                controller.receivedOrder!.routes["driverToMerchant"];
+            var merchantToCustomer = controller.receivedOrder!
+                .routes["merchantToCustomer"]; // customerToMerchant
+
+            if (driverToMerchant != null && merchantToCustomer != null) {
+              points.addAll(driverToMerchant.coordinates);
+              points.addAll(merchantToCustomer.coordinates);
+            }
+          }
+
+          markers.add(
+            Marker(
+              point: geoController.currentPosition,
+              builder: (context) => IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.person_pin_circle),
+                color: Colors.blue,
+                iconSize: 45,
+              ),
             ),
-            // Marker
-            MarkerLayer(
-              markers: [
-                // start marker
-                Marker(
-                  point: LatLng(-7.758668, 110.3806492),
-                  width: 80,
-                  height: 80,
-                  builder: (context) => IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.location_on),
-                    color: Colors.green,
-                    iconSize: 45,
-                  ),
-                ),
-                // end marker
-                Marker(
-                  point: LatLng(-7.7674489, 110.3761053),
-                  width: 80,
-                  height: 80,
-                  builder: (context) => IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.location_on),
-                    color: Colors.red,
-                    iconSize: 45,
-                  ),
-                ),
-                // self marker
-                Marker(
-                  point: geoController.currentPosition,
-                  width: 80,
-                  height: 80,
-                  builder: (context) => IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.person_pin_circle),
-                    color: Colors.blue,
-                    iconSize: 45,
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-        Obx(
-          () => Text(
-            "Current Position: ${geoController.currentPosition}",
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          );
+
+          return FlutterMap(
+            options: MapOptions(
+              center: LatLng(
+                  currentPosition.latitude - 0.008, currentPosition.longitude),
+              zoom: 13.0,
             ),
-          ),
-        ),
+            children: [
+              // Map Layer
+              TileLayer(
+                urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+              ),
+              // Marker
+              MarkerLayer(
+                markers: markers,
+              ),
+              // polyline layer
+              controller.receivedOrder != null
+                  ? PolylineLayer(
+                      polylines: [
+                        // driver to merchant
+                        Polyline(
+                          points: points,
+                          strokeWidth: 4.0,
+                          color: Colors.blue,
+                        ),
+                      ],
+                    )
+                  : const SizedBox(),
+            ],
+          );
+        }),
         DraggableScrollableSheet(
+          initialChildSize: 0.3,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
                 color: Colors.white,
@@ -196,8 +225,11 @@ class MapPage extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
-                                        TextFormatter.convertMeterToKm(
-                                            order.distance),
+                                        TextFormatter.convertMeterToKm(order
+                                                .routes["driverToMerchant"]!
+                                                .distance +
+                                            order.routes["merchantToCustomer"]!
+                                                .distance),
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12,

@@ -40,7 +40,6 @@ class SocketService {
     socket.on('location', (data) {
       // print(data);
       Handshake handshake = Handshake.fromJson(data);
-      print(handshake);
 
       // send back location and data to server
       var currentPosition = GeoController.to.currentPosition;
@@ -61,11 +60,10 @@ class SocketService {
     });
 
     socket.on('newOrder', (data) {
-      print(data);
       // parse data
       Transaction transaction = Transaction.fromJson(data);
       // set new order received to true in order controller
-      // OrderController.to.setOrder(transaction);
+      print(transaction);
       OrderController.to.receiveOrder(transaction);
     });
 

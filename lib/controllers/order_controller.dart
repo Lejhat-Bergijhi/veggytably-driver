@@ -11,7 +11,7 @@ class OrderController extends GetxController {
   Transaction? receivedOrder;
   RxBool isListening = true.obs;
   RxBool isAccepted = false.obs;
-  RxBool rejected = false.obs;
+  RxBool stopTimer = false.obs;
 
   Timer? timer;
   final RxInt _seconds = 0.obs;
@@ -23,26 +23,6 @@ class OrderController extends GetxController {
       isListening(false);
       setOrder(transaction);
 
-      //  display order for 30 seconds then automatically decline
-      // int counter = 30;
-      // _seconds.value = counter;
-
-      // timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      //   _seconds.value = counter - timer.tick;
-
-      //   if (rejected.value) {
-      //     stopCountDown();
-      //     rejectOrder();
-      //     rejected.value = false;
-      //   }
-
-      //   if (timer.tick == counter) {
-      //     stopCountDown();
-      //     rejectOrder();
-      //   }
-      // });
-
-      // await Future.delayed(const Duration(seconds: 30));
       await countDown(30);
 
       isListening(true);
@@ -63,10 +43,10 @@ class OrderController extends GetxController {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _seconds.value = time - timer.tick;
 
-      if (rejected.value || timer.tick == time + 1) {
+      if (stopTimer.value || timer.tick == time + 1) {
         stopCountDown();
         rejectOrder();
-        rejected.value = false;
+        stopTimer.value = false;
 
         completer.complete();
       }
@@ -90,12 +70,13 @@ class OrderController extends GetxController {
   }
 
   void acceptOrder() {
+    stopTimer.value = true;
     // send to server
     // receivedOrder.value = null;
   }
 
   void rejectOrder() {
-    rejected.value = true;
+    stopTimer.value = true;
     // send to server
     // receivedOrder.value = null;
   }

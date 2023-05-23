@@ -26,4 +26,9 @@ class TextFormatter {
     return formatter
         .format(DateTime.fromMillisecondsSinceEpoch(seconds * 1000));
   }
+
+  static String formatCurrency(var input) {
+    return NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0)
+        .format(input);
+  }
 }

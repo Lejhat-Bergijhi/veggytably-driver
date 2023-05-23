@@ -23,7 +23,7 @@ class OrderController extends GetxController {
       isListening(false);
       setOrder(transaction);
 
-      await countDown(30);
+      await countDown(30 * 60);
 
       isListening(true);
     } catch (e) {

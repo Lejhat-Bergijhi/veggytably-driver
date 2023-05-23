@@ -9,6 +9,8 @@ import '../utils/text_format.dart';
 
 class MapPage extends StatelessWidget {
   final GeoController geoController = Get.put(GeoController());
+  final DraggableScrollableController dragController =
+      DraggableScrollableController();
 
   MapPage({super.key});
 
@@ -108,10 +110,26 @@ class MapPage extends StatelessWidget {
           );
         }),
         DraggableScrollableSheet(
-          initialChildSize: 0.3,
+          controller: dragController,
+          initialChildSize: 0.4,
+          snapSizes: const [0.4, 0.8],
+          snap: true,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
-                color: Colors.white,
+                decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x1a000000),
+                      blurRadius: 4,
+                      offset: Offset(0, -4),
+                    ),
+                  ],
+                  color: Color(0xfff8f8f8),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.only(
                     left: 16,
@@ -120,16 +138,9 @@ class MapPage extends StatelessWidget {
                   child: GetBuilder<OrderController>(builder: (controller) {
                     if (controller.isListening.value ||
                         controller.receivedOrder == null) {
-                      return Column(children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            controller: scrollController,
-                            child: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                        ),
-                      ]);
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
 
                     var order = controller.receivedOrder;
@@ -314,24 +325,107 @@ class MapPage extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 20),
+                        Container(
+                          constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "ORDER DETAILS",
+                                style: TextStyle(
+                                  color: Color(0xff9f9f9f),
+                                  fontSize: 15,
+                                  fontFamily: "Rubik",
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Flexible(
+                                fit: FlexFit.loose,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: order.orderList.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 4, bottom: 4),
+                                      child: Column(children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Text(
+                                                '${order.orderList[index].quantity}x',
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontFamily: "Rubik",
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 5,
+                                              child: Text(
+                                                order
+                                                    .orderList[index].menu.name,
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontFamily: "Rubik",
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 2,
+                                              child: Text(
+                                                TextFormatter.formatCurrency(
+                                                    order.orderList[index].menu
+                                                        .price),
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontFamily: "Rubik",
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const Divider(
+                                          thickness: 1,
+                                        ),
+                                      ]),
+                                    );
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 20),
                         SizedBox(
                           width: MediaQuery.of(context).size.width - 48,
                           height: 44,
                           child: ElevatedButton(
-                            onPressed: () {
-                              // emailController.clear();
-                              // passwordController.clear();
-                            },
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff70cb88),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
                             child: const Text(
                               'ACCEPT',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color(0xff70cb88),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
                               ),
                             ),
                           ),
@@ -383,6 +477,14 @@ class MapPage extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       controller.rejectOrder();
+                                      if (dragController.isAttached) {
+                                        dragController.animateTo(
+                                          0,
+                                          duration:
+                                              const Duration(milliseconds: 500),
+                                          curve: Curves.easeOut,
+                                        );
+                                      }
                                     },
                                     style: ElevatedButton.styleFrom(
                                       side: const BorderSide(

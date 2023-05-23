@@ -7,7 +7,6 @@ import 'package:veggytably_driver/widgets/deliver_to_cust_appbar.dart';
 
 import '../widgets/custom_appbar.dart';
 import 'home_page/offline_body.dart';
-import 'home_page/online_body.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

@@ -6,11 +6,11 @@ import 'package:veggytably_driver/views/profile_page.dart';
 import 'home_page.dart';
 
 class LandingPage extends StatelessWidget {
-  final ProfileController profileController = Get.find<ProfileController>();
+  final ProfileController profileController = Get.put(ProfileController());
 
   final List<Widget> pages = [
     const Placeholder(), // history page
-    const HomePage(),
+    HomePage(),
     const ProfilePageDriver(),
   ];
 

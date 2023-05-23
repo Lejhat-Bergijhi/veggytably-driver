@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:veggytably_driver/controllers/auth_controller.dart';
-import 'package:veggytably_driver/views/upload_pic.dart';
 import 'package:veggytably_driver/widgets/input_text.dart';
 
 import 'package:veggytably_driver/views/login_page.dart';
-import 'package:veggytably_driver/views/signup_page_2.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({super.key});

@@ -1,15 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'custom_switch.dart';
 
-class acceptingAppbar extends StatelessWidget with PreferredSizeWidget {
-  final String title;
+class AcceptingAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
 
- acceptingAppbar({
-    required this.title,
-  }) : preferredSize = Size.fromHeight(171.0);
+  const AcceptingAppbar({
+    super.key,
+  }) : preferredSize = const Size.fromHeight(171.0);
 
   Widget build(BuildContext context) {
     return Container(
@@ -23,17 +20,16 @@ class acceptingAppbar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 19),
-          child: Text(
-              "Heading To The Restaurant",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Color(0xff356631),
-                  fontSize: 17,
-                  fontFamily: "Rubik",
-                  fontWeight: FontWeight.bold,
-              ),
+          child: const Text(
+            "Heading To The Restaurant",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color(0xff356631),
+              fontSize: 17,
+              fontFamily: "Rubik",
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        )
-    );
+        ));
   }
 }

@@ -4,8 +4,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:veggytably_driver/views/landing_page.dart';
 
-import 'home_page.dart';
-
 class UploadPic extends StatefulWidget {
   const UploadPic({super.key});
 
@@ -14,16 +12,13 @@ class UploadPic extends StatefulWidget {
 }
 
 class _UploadPicState extends State<UploadPic> {
-  late XFile _imageFile;
   final ImagePicker picker = ImagePicker();
 
   void takePhoto(ImageSource source) async {
     final pickedFile = await picker.pickImage(source: source);
 
     if (pickedFile == null) return;
-    setState(() {
-      _imageFile = pickedFile;
-    });
+    setState(() {});
   }
 
   @override

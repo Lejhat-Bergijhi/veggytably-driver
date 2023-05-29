@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart" hide Response;
 import "package:veggytably_driver/controllers/profile_controller.dart";
+import "package:veggytably_driver/utils/api.endpoints.dart";
 import "package:veggytably_driver/views/upload_pic.dart";
 import 'package:dio/dio.dart';
 import "../api/auth_api.dart";
@@ -30,6 +31,11 @@ class AuthController extends GetxController {
   void onReady() {
     super.onReady();
     // TODO uncomment code if ready to implement
+    checkAuth();
+    ever(isLogin, _initialScreen);
+  }
+
+  void resetAuth() {
     checkAuth();
     ever(isLogin, _initialScreen);
   }
@@ -107,7 +113,6 @@ class AuthController extends GetxController {
         "password": passwordController.text,
         "role": "DRIVER",
       };
-
       Response response = await AuthApi.instance.postLogin(body);
 
       print(response.toString());
@@ -176,6 +181,9 @@ class AuthController extends GetxController {
 
   Future<void> checkAuth() async {
     try {
+      isLoading(true);
+      Get.snackbar("base url", ApiEndPoints.baseUrl);
+
       String? refreshToken = await _storage.read(key: "refreshToken");
 
       // check expire time of refreshToken
@@ -201,6 +209,8 @@ class AuthController extends GetxController {
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());
+    } finally {
+      isLoading(false);
     }
   }
 

@@ -1,14 +1,17 @@
 import 'dart:async';
 
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:veggytably_driver/utils/text_format.dart';
 
+import '../api/transaction_api.dart';
 import '../models/transaction_model.dart';
 
 class OrderController extends GetxController {
   static OrderController to = Get.find();
 
   Transaction? receivedOrder;
+  RxBool isLoading = false.obs;
   RxBool isListening = true.obs;
   RxBool isAccepted = false.obs;
   RxBool stopTimer = false.obs;
@@ -30,7 +33,6 @@ class OrderController extends GetxController {
       print(e);
       isListening(true);
     } finally {
-      clearOrder();
       update();
     }
   }
@@ -69,14 +71,30 @@ class OrderController extends GetxController {
     receivedOrder = null;
   }
 
-  void acceptOrder() {
-    stopTimer.value = true;
+  Future<void> acceptOrder() async {
     // send to server
-    // receivedOrder.value = null;
+    try {
+      isLoading(true);
+      update();
+      Response response = await TransactionApi.instance
+          .acceptOrder(receivedOrder!.transactionId);
+
+      if (response.statusCode != 200) {
+        throw Exception("Failed to accept order");
+      }
+
+      isAccepted(true);
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading(false);
+      update();
+    }
   }
 
   void rejectOrder() {
     stopTimer.value = true;
+    clearOrder();
     // send to server
     // receivedOrder.value = null;
   }

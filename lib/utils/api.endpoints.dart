@@ -1,8 +1,16 @@
 class ApiEndPoints {
-  static const String domain = "192.168.88.143";
-  static const String baseUrl = 'http://$domain:5000/';
+  static String domain = "192.168.88.143";
+  static String baseUrl = 'http://$domain:5000/';
+  // static String baseUrl = 'https://2675-149-113-6-220.ngrok-free.app/';
   static final _AuthEndPoints authEndpoints = _AuthEndPoints();
   static final _DriverEndPoints driverEndpoints = _DriverEndPoints();
+  static final _TransactionEndPoints transactionEndPoints =
+      _TransactionEndPoints();
+
+  // set domain
+  static void setDomain(String domain) {
+    ApiEndPoints.domain = domain;
+  }
 }
 
 class _AuthEndPoints {
@@ -16,4 +24,10 @@ class _AuthEndPoints {
 
 class _DriverEndPoints {
   final String getProfile = "drivers/profile";
+}
+
+class _TransactionEndPoints {
+  String acceptOrder(String transactionId) {
+    return "transactions/$transactionId/accept";
+  }
 }

@@ -83,6 +83,7 @@ class Address {
 }
 
 class Transaction {
+  late String transactionId;
   late Map<String, Route> routes;
   // late double distance;
   // late double duration;
@@ -94,6 +95,7 @@ class Transaction {
   late String customerName;
 
   Transaction({
+    required this.transactionId,
     required this.routes,
     // required this.distance,
     // required this.duration,
@@ -117,6 +119,7 @@ class Transaction {
     };
 
     return Transaction(
+      transactionId: json['transactionId'],
       routes: routes,
       merchantAddress: Address.fromJson(json['merchantAddress']),
       customerAddress: Address.fromJson(json['customerAddress']),
@@ -129,7 +132,7 @@ class Transaction {
 
   @override
   String toString() {
-    return 'Transaction{routes: $routes, merchantAddress: $merchantAddress, customerAddress: $customerAddress, orderList: $orderList, paymentMethod: $paymentMethod, totalPrice: $totalPrice, customerName: $customerName}';
+    return 'Transaction{transactionId: $transactionId, routes: $routes, merchantAddress: $merchantAddress, customerAddress: $customerAddress, orderList: $orderList, paymentMethod: $paymentMethod, totalPrice: $totalPrice, customerName: $customerName}';
   }
 }
 

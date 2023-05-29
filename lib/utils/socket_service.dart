@@ -63,7 +63,7 @@ class SocketService {
       // parse data
       Transaction transaction = Transaction.fromJson(data);
       // set new order received to true in order controller
-      print(transaction);
+      // print(transaction);
       OrderController.to.receiveOrder(transaction);
     });
 

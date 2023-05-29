@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:veggytably_driver/controllers/auth_controller.dart';
 import 'package:veggytably_driver/widgets/input_text.dart';
+import '../utils/api.endpoints.dart';
 import 'signup_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -19,7 +20,17 @@ class LoginPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Center(
             child: Column(children: [
-              SizedBox(height: 240),
+              const SizedBox(height: 240),
+
+              Obx(() {
+                if (AuthController.to.isLoading.value) {
+                  return const CircularProgressIndicator();
+                } else {
+                  return Container();
+                }
+              }),
+              // baseurl
+              Text(ApiEndPoints.baseUrl),
 
               // Text: VegyMerch
               Text(
@@ -67,7 +78,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: 16),
 
               // Login Submit button
-              Container(
+              SizedBox(
                 width: 300,
                 height: 45,
                 child: ElevatedButton(

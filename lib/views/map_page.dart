@@ -411,102 +411,148 @@ class MapPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width - 48,
-                          height: 44,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff70cb88),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                            child: const Text(
-                              'ACCEPT',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        SizedBox(
-                            height: 44,
-                            width: MediaQuery.of(context).size.width - 48,
-                            child: Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 12,
-                                  ),
-                                  height: 44,
-                                  width: 74 /
-                                      (312) *
-                                      (MediaQuery.of(context).size.width - 48),
-                                  decoration: BoxDecoration(
+                        GetBuilder<OrderController>(
+                          builder: (orderController) {
+                            if (orderController.isLoading.value) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+
+                            if (controller.isAccepted.value) {
+                              return ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xff70cb88),
+                                  shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: const Color(0xff70cb88),
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: Obx(
-                                    () => Text(
-                                      controller.minutes,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: Color(0xff70cb88),
-                                        fontSize: 15,
-                                        fontFamily: "Rubik",
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 9 /
-                                      (312) *
-                                      (MediaQuery.of(context).size.width - 48),
+                                child: const Text(
+                                  'DELIVER ORDER',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
+                              );
+                            }
+
+                            return Column(
+                              children: [
                                 SizedBox(
+                                  width: MediaQuery.of(context).size.width - 48,
                                   height: 44,
-                                  width: 229 /
-                                      (312) *
-                                      (MediaQuery.of(context).size.width - 48),
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      controller.rejectOrder();
-                                      if (dragController.isAttached) {
-                                        dragController.animateTo(
-                                          0,
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          curve: Curves.easeOut,
-                                        );
-                                      }
+                                      controller.acceptOrder();
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      side: const BorderSide(
-                                        color: Color(0xff70cb88),
-                                        width: 1,
-                                      ),
+                                      backgroundColor: const Color(0xff70cb88),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
-                                      primary: const Color(0xfff8f8f8),
                                     ),
                                     child: const Text(
-                                      'DECLINE',
+                                      'ACCEPT',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xff70cb88),
                                       ),
                                     ),
                                   ),
                                 ),
+                                const SizedBox(height: 8),
+                                SizedBox(
+                                    height: 44,
+                                    width:
+                                        MediaQuery.of(context).size.width - 48,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 12,
+                                          ),
+                                          height: 44,
+                                          width: 74 /
+                                              (312) *
+                                              (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  48),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border: Border.all(
+                                              color: const Color(0xff70cb88),
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: Obx(
+                                            () => Text(
+                                              controller.minutes,
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                color: Color(0xff70cb88),
+                                                fontSize: 15,
+                                                fontFamily: "Rubik",
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 9 /
+                                              (312) *
+                                              (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  48),
+                                        ),
+                                        SizedBox(
+                                          height: 44,
+                                          width: 229 /
+                                              (312) *
+                                              (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  48),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              controller.rejectOrder();
+                                              if (dragController.isAttached) {
+                                                dragController.animateTo(
+                                                  0,
+                                                  duration: const Duration(
+                                                      milliseconds: 500),
+                                                  curve: Curves.easeOut,
+                                                );
+                                              }
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              side: const BorderSide(
+                                                color: Color(0xff70cb88),
+                                                width: 1,
+                                              ),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              primary: const Color(0xfff8f8f8),
+                                            ),
+                                            child: const Text(
+                                              'DECLINE',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xff70cb88),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ))
                               ],
-                            ))
+                            );
+                          },
+                        ),
                       ],
                     );
                   }),

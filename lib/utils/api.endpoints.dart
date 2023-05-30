@@ -1,5 +1,5 @@
 class ApiEndPoints {
-  static String domain = "192.168.88.143";
+  static String domain = "10.6.186.210";
   static String baseUrl = 'http://$domain:5000/';
   // static String baseUrl = 'https://2675-149-113-6-220.ngrok-free.app/';
   static final _AuthEndPoints authEndpoints = _AuthEndPoints();
@@ -29,5 +29,9 @@ class _DriverEndPoints {
 class _TransactionEndPoints {
   String acceptOrder(String transactionId) {
     return "transactions/$transactionId/accept";
+  }
+
+  String updateTransactionStatus(String transactionId) {
+    return "transactions/$transactionId/status";
   }
 }

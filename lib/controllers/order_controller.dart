@@ -15,6 +15,7 @@ class OrderController extends GetxController {
   RxBool isListening = true.obs;
   RxBool isAccepted = false.obs;
   RxBool stopTimer = false.obs;
+  RxString status = ''.obs;
 
   Timer? timer;
   final RxInt _seconds = 0.obs;
@@ -92,6 +93,32 @@ class OrderController extends GetxController {
     }
   }
 
+  Future<void> updateTransactionStatus(String status) async {
+    try {
+      isLoading(true);
+      update();
+
+      if (status != "RECEIVED" &&
+          status != "PROCESSING" &&
+          status != "ON_DELIVERY" &&
+          status != "FINISHED") {
+        throw Exception("Invalid status input");
+      }
+      Response response = await TransactionApi.instance
+          .updateTransactionStatus(receivedOrder!.transactionId, status);
+
+      if (response.statusCode != 200) {
+        throw Exception("Failed to update transaction status");
+      }
+    } catch (e) {
+      print(e);
+      Get.snackbar("Failed to update transaction status", e.toString());
+    } finally {
+      isLoading(false);
+      update();
+    }
+  }
+
   void rejectOrder() {
     stopTimer.value = true;
     clearOrder();
@@ -100,7 +127,14 @@ class OrderController extends GetxController {
   }
 
   void deliverOrder() {
-    // send to server
-    // receivedOrder.value = null;
+    status.value = "ON_DELIVERY";
+    updateTransactionStatus("ON_DELIVERY");
+  }
+
+  void finishOrder() {
+    status.value = "FINISHED";
+    updateTransactionStatus("FINISHED");
+    Get.snackbar("Order finished", "You have finished the order!");
+    clearOrder();
   }
 }

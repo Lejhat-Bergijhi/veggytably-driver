@@ -420,8 +420,30 @@ class MapPage extends StatelessWidget {
                             }
 
                             if (controller.isAccepted.value) {
+                              if (controller.status.value == 'ON_DELIVERY') {
+                                return ElevatedButton(
+                                  onPressed: () {
+                                    controller.finishOrder();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xff70cb88),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'FINISH ORDER',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                );
+                              }
+
                               return ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  controller.deliverOrder();
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xff70cb88),
                                   shape: RoundedRectangleBorder(

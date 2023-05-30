@@ -27,4 +27,31 @@ class TransactionApi {
       print(e);
     }
   }
+
+  Future<dynamic> updateTransactionStatus(
+      String transactionId, String status) async {
+    String? refreshToken = await _storage.read(key: "refreshToken");
+    if (refreshToken == null) {
+      throw Exception("Refresh token is null");
+    }
+
+    try {
+      Response response = await Dio().put(
+        ApiEndPoints.baseUrl +
+            ApiEndPoints.transactionEndPoints
+                .updateTransactionStatus(transactionId),
+        options: Options(
+          headers: <String, String>{
+            "authorization": "Bearer $refreshToken",
+          },
+        ),
+        data: {"status": status},
+      );
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+    }
+  }
 }
